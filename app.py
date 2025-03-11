@@ -27,7 +27,7 @@ async def thankyou(request: Request):
 async def find_attractions(request: Request, page: int = Query(), keyword: str = Query(default=None)) :
 	if keyword:
 		cursor = cnx.cursor()
-		cursor.execute("select * from attractions where mrt = %s and name like %s;", (keyword,f"%{keyword}%"))
+		cursor.execute("select * from attractions where mrt = %s or name like %s;", (keyword,f"%{keyword}%"))
 		results = cursor.fetchall()
 	else:
 		cursor = cnx.cursor()
@@ -60,4 +60,8 @@ async def find_attractions(request: Request, page: int = Query(), keyword: str =
 		
 	except Exception as e:
 		return JSONResponse({"error": True, "message": str(e)}, status_code=500)
+
+# @app.get("/api/attraction/{attractionID}")
+# async def one_attraction(request: Request, attractionID: int):
+
 	
