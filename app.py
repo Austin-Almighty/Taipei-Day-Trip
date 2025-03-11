@@ -4,6 +4,7 @@ import mysql.connector
 from typing import Annotated
 from starlette.middleware.sessions import SessionMiddleware
 from config import config
+import json
 
 cnx = mysql.connector.connect(**config)
 
@@ -52,16 +53,49 @@ async def find_attractions(request: Request, page: int = Query(), keyword: str =
 			data['mrt'] = item[6]
 			data['lat'] = item[7]
 			data['lng'] = item[8]
-			data['images'] = item[9]
+			data['images'] = json.loads(item[9])
 			data_list.append(data)
 			
 		response = {"nextPage":next_page, "data":data_list}
 		return JSONResponse(response, status_code=200)
 		
-	except Exception as e:
-		return JSONResponse({"error": True, "message": str(e)}, status_code=500)
+	except Exception:
+		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)
 
-# @app.get("/api/attraction/{attractionID}")
-# async def one_attraction(request: Request, attractionID: int):
+@app.get("/api/attraction/{attractionID}")
+async def one_attraction(request: Request, attractionID: int):
+	try:
+		cursor = cnx.cursor()
+		cursor.execute("select * from attractions where id = %s;", (attractionID,))
+		result = cursor.fetchone()
 
+		if result is None:
+			return JSONResponse({"error": True, "message": "景點編號不正確"}, status_code=400)
+
+		data = {
+            "id": result[0],
+            "name": result[1],
+            "category": result[2],
+            "description": result[3],
+            "address": result[4],
+            "transport": result[5],
+            "mrt": result[6],
+            "lat": result[7],
+            "lng": result[8],
+            "images": json.loads(result[9])
+        }
+		return JSONResponse({"data":data}, status_code=200)
 	
+	except Exception:
+		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)
+
+@app.get('/api/mrts')
+async def mrts(request: Request):
+	try:
+		cursor = cnx.cursor()
+		cursor.execute("select mrt from attractions group by mrt order by count(mrt) desc")
+		stations = cursor.fetchall()
+		data = [station[0] for station in stations if station[0]]
+		return JSONResponse({"data":data}, status_code=200)
+	except Exception:
+		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)
