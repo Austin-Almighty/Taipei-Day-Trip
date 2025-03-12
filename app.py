@@ -27,22 +27,21 @@ async def thankyou(request: Request):
 @app.get('/api/attractions')
 async def find_attractions(request: Request, page: int = Query(), keyword: str = Query(default=None)) :
 	if keyword:
+		offset = page*12
 		cursor = cnx.cursor()
-		cursor.execute("select * from attractions where mrt = %s or name like %s;", (keyword,f"%{keyword}%"))
+		cursor.execute("select * from attractions where mrt = %s or name like %s limit 12 offset %s;", (keyword,f"%{keyword}%", offset))
 		results = cursor.fetchall()
 	else:
+		offset = page*12
 		cursor = cnx.cursor()
-		cursor.execute("select * from attractions")
+		cursor.execute("select * from attractions limit 12 offset %s;", (offset,))
 		results = cursor.fetchall()
 	
 	try:
-		start = page*12
-		end = (page+1)*12
-		spliced_results = results[start:end]
-		next_page = page + 1 if end < len(results) else None
+		next_page = page + 1
 		data_list = []
 
-		for item in spliced_results:
+		for item in results:
 			data = {}
 			data['id'] = item[0]
 			data['name'] = item[1]
