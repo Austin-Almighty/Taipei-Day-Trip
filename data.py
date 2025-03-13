@@ -8,7 +8,7 @@ from config import config
 cnx = mysql.connector.connect(**config)
 
 def read_json(file):
-    with open(file, mode='r', encoding='utf-8') as f:
+    with open(file, mode='r') as f:
         data = json.load(f)
     return data["result"]["results"]
 
