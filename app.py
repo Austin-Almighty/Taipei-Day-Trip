@@ -38,7 +38,7 @@ async def find_attractions(request: Request, page: int = Query(), keyword: str =
 		results = cursor.fetchall()
 	
 	try:
-		next_page = page + 1
+		next_page = page + 1 if len(results) == 12 else None
 		data_list = []
 
 		for item in results:
