@@ -56,9 +56,8 @@ def write_to_db(file):
         lat = location.get('lat')
         lng = location.get('lng')
         images = json.dumps(location.get('images'))
-        api = json.dumps(location)
         
-        values = (row_id, name, category, description, address, transport, mrt, lat, lng, images, api)
+        values = (row_id, name, category, description, address, transport, mrt, lat, lng, images)
         cursor.execute(query, values)
 
     cnx.commit()
