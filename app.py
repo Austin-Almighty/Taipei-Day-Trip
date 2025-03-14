@@ -49,19 +49,21 @@ async def thankyou(request: Request):
 @app.get('/api/attractions', response_model=AttractionsResponse)
 async def find_attractions(request: Request, page: int = Query(), keyword: str = Query(default=None)) :
 	if keyword:
+		limit = 13
 		offset = page*12
 		cursor = cnx.cursor(dictionary=True)
-		cursor.execute("select * from attractions where mrt = %s or name like %s limit 12 offset %s;", (keyword,f"%{keyword}%", offset))
+		cursor.execute("select * from attractions where mrt = %s or name like %s limit %s offset %s;", (keyword,f"%{keyword}%", limit, offset))
 		results = cursor.fetchall()
 	else:
+		limit = 13
 		offset = page*12
 		cursor = cnx.cursor(dictionary=True)
-		cursor.execute("select * from attractions limit 12 offset %s;", (offset,))
+		cursor.execute("select * from attractions limit %s offset %s;", (limit, offset))
 		results = cursor.fetchall()
 	
 	try:
-		next_page = page + 1 if len(results) == 12 else None
-		data_list = [result for result in results]
+		next_page = page + 1 if len(results) == limit else None
+		data_list = [result for result in results[:-1]]
 			
 		response = {"nextPage":next_page, "data":data_list}
 		return JSONResponse(response, status_code=200)
