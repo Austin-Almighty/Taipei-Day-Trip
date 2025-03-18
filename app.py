@@ -69,7 +69,10 @@ async def find_attractions(request: Request, page: int = Query(), keyword: str =
 	
 	try:
 		next_page = page + 1 if len(results) == limit else None
-		data_list = [result for result in results[:-1]]
+		if len(results) == 13:
+			data_list = [result for result in results[:-1]]
+		else:
+			data_list = [result for result in results]
 			
 		response = {"nextPage":next_page, "data":data_list}
 		return JSONResponse(response, status_code=200)
