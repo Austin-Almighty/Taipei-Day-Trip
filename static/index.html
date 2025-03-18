@@ -1,50 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Index</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../external/index.css">
+  <!-- <link href="{{ url_for('external', path='index.css') }}" rel="stylesheet"> -->
 </head>
+
 <body>
   <nav>
     <div id="navbar">
       <h2>台北一日遊</h2>
       <div id="login">
-        <div class="button">預定行程</div>
-        <div class="button">登入/註冊</div>
+        <div class="register">預定行程</div>
+        <div class="register">登入/註冊</div>
       </div>
     </div>
   </nav>
   <div class="hero-section">
-      <div></div>
+    <div></div>
   </div>
   <main>
-    <div class="list-bar">
+    <div id="scroll">
+      <img src="../external/left arrow.png" id="leftClick">
+      <div class="list-bar">
+        <!-- <div class="stations">捷運站</div>  -->
+      </div>
+      <img src="../external/right arrow.png" id="rightClick">
     </div>
-    <div class="attractions">
+    <!-- <button id="mrt">Test MRT</button>
+    <button id="testattractions">Test Attractions</button> -->
+    <div class="display">
       <div class="grid">
-        <div class="attraction" id="box-1"></div>
-        <div class="attraction" id="box-2"></div>
-        <div class="attraction" id="box-3"></div>
-        <div class="attraction" id="box-4"></div>
-        <div class="attraction" id="box-5"></div>
-        <div class="attraction" id="box-6"></div>
-        <div class="attraction" id="box-7"></div>
-        <div class="attraction" id="box-8"></div>
-        <div class="attraction" id="box-9"></div>
-        <div class="attraction" id="box-10"></div>
-        <div class="attraction" id="box-11"></div>
-        <div class="attraction" id="box-12"></div>
+        <div class="attraction">
+          <img src="../external/welcome.png">
+          <div class="attractionName">平安鐘</div>
+          <div class="attractionInfo">
+            <div class="station">忠孝復興</div>
+            <div class="category">公共藝術</div>
+          </div>
+        </div>
+        <!-- <div class="attraction" id="box-2"></div> -->
+        <!-- <div class="attraction" id="box-3"></div> -->
+        <!-- <div class="attraction" id="box-4"></div> -->
+        <!-- <div class="attraction" id="box-5"></div> -->
+        <!-- <div class="attraction" id="box-6"></div> -->
+        <!-- <div class="attraction" id="box-7"></div> -->
+        <!-- <div class="attraction" id="box-8"></div> -->
+        <!-- <div class="attraction" id="box-9"></div> -->
+        <!-- <div class="attraction" id="box-10"></div> -->
+        <!-- <div class="attraction" id="box-11"></div> -->
+        <!-- <div class="attraction" id="box-12"></div> -->
       </div>
     </div>
   </main>
   <footer>
     <p>COPYRIGHT © 2021 台北一日遊</p>
   </footer>
-  <script src="../scripts.js"></script>
+  <script src="../external/index.js"></script>
+  <!-- <script src="{{ url_for('external', path='index.js') }}"></script> -->
 </body>
+
 </html>
