@@ -41,7 +41,6 @@ async function renderStation(station) {
         renderAttractions();
     })
     listBar.appendChild(addMRT);
-    return;
 }
 
 async function fetchStations() {
@@ -128,7 +127,6 @@ async function renderAttractions() {
     }
 }
 
-
 let isFetching = false;
 
 async function loadNextPage() {
@@ -138,10 +136,7 @@ async function loadNextPage() {
   isFetching = false;
 }
 
-
-
 document.addEventListener('DOMContentLoaded', async () => {
-    await renderAttractions();
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
