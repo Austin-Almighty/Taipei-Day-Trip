@@ -2,13 +2,20 @@ const attractions = document.querySelector('.attractions');
 const listBar = document.querySelector('.list-bar');
 
 let nextPage = 0;
-let keyword ='';
+let keyword = null;
 
 // Render the lists of stations in the scroll bar
 async function renderStation(station) {
     const addMRT = document.createElement('div');
     addMRT.classList.add('stations');
     addMRT.textContent = station;
+    addMRT.addEventListener('click', ()=>{
+        nextPage = 0;
+        keyword = station;
+        const gridDiv = document.querySelector('.grid');
+        gridDiv.innerHTML = '';
+        renderAttractions();
+    })
     listBar.appendChild(addMRT);
     return;
 }
@@ -50,6 +57,8 @@ async function fetchAttractions(page, keyword = null) {
     if (response.ok) {
         let data = await response.json();
         return data;
+    } else {
+        console.log('Cannot reach API endpoints.');
     }
 }
 

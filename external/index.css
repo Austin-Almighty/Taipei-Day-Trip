@@ -50,8 +50,65 @@ body {
 
     .hero-section {
         background-image: url('/external/welcome.png');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;  
+        align-items: center;   
         height: 320px;
-    }
+        width: 100%;
+      }
+      
+      .searchSection {
+        width: 1200px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;  
+        text-align: left;         
+        gap: 20px;  
+        margin-left: 15px;  
+      }
+      
+      #search {
+        color: #F8F8F8;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+      }
+      
+      .searchDiv {
+        display: flex;
+        align-items: center;
+      }
+      
+      #searchBox {
+        width: 400px;
+        height: 46px;
+        border-radius: 5px;
+        font-weight: 700;
+        color: #757575;
+        padding-left: 15px;
+        outline: none;
+        border: none;
+      }
+      
+      #searchIcon {
+        height: 48px;
+        width: 60px;
+        background-color: #448899;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        left: -59px;
+      }
+      
+      #searchIcon img {
+        width: 30px;
+        height: 30px;
+      }
 
     main {
         padding: 40px 0;
@@ -97,6 +154,14 @@ body {
         font-weight: 500;
         font-size: 16px;
         justify-content: center;
+    }
+
+    .list-bar .stations:hover {
+        background-color: hsl(0, 0%, 60%);
+    }
+
+    .list-bar .stations:active {
+        background-color: hsl(0, 0%, 80%);
     }
 
     .display {
@@ -146,7 +211,7 @@ body {
         position: relative;
         top: px;
         width: 249px;
-        height: minmax(45px, 61px);
+        height: 45px;
         position: relative;
         top: -45px;
         align-items: center;
