@@ -15,8 +15,8 @@ function performSearch() {
     keyword = searchKeyword;
     const gridDiv = document.querySelector('.grid');
     gridDiv.innerHTML = '';
-    observer.disconnect();
-    renderAttractions();
+    // observer.disconnect();
+    loadNextPage();
   }
 
 
@@ -39,8 +39,8 @@ async function renderStation(station) {
         keyword = station;
         const gridDiv = document.querySelector('.grid');
         gridDiv.innerHTML = '';
-        observer.disconnect();
-        renderAttractions();
+        // observer.disconnect();
+        loadNextPage();
     })
     listBar.appendChild(addMRT);
 }
