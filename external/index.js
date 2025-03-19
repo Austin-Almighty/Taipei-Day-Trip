@@ -4,6 +4,30 @@ const listBar = document.querySelector('.list-bar');
 let nextPage = 0;
 let keyword = null;
 
+const searchBox = document.getElementById('searchBox');
+const searchIcon = document.getElementById('searchIcon');
+const searchImage = document.getElementById('searchImage');
+const searchForm = document.getElementById('searchForm');
+
+function performSearch() {
+    let searchKeyword = searchBox.value.trim();
+    nextPage = 0;
+    keyword = searchKeyword;
+    const gridDiv = document.querySelector('.grid');
+    gridDiv.innerHTML = '';
+    loadNextPage();
+  }
+
+
+searchIcon.addEventListener('click', performSearch)
+searchImage.addEventListener('click', performSearch)
+searchBox.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+      performSearch();
+    }
+  });
+
 // Render the lists of stations in the scroll bar
 async function renderStation(station) {
     const addMRT = document.createElement('div');
@@ -14,7 +38,7 @@ async function renderStation(station) {
         keyword = station;
         const gridDiv = document.querySelector('.grid');
         gridDiv.innerHTML = '';
-        renderAttractions();
+        loadNextPage();
     })
     listBar.appendChild(addMRT);
     return;
@@ -118,8 +142,6 @@ async function loadNextPage() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     await renderAttractions();
-    
-    // Now set up the IntersectionObserver to load the next page when the sentinel is in view
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {

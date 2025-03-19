@@ -105,6 +105,15 @@ body {
         left: -59px;
       }
       
+
+      #searchIcon:hover {
+        background-color: hsl(192, 38%, 50%);
+      }
+
+      #searchIcon:active {
+        background-color: hsl(192, 38%, 30%);
+      }
+
       #searchIcon img {
         width: 30px;
         height: 30px;
