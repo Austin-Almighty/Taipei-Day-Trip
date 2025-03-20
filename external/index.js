@@ -70,7 +70,7 @@ rightScroll.addEventListener('click', ()=>scrollClick(listBar, 30));
 
 async function fetchAttractions(page, keyword = null) {
 
-    let endpoint = `api/attractions/?page=${page}`;
+    let endpoint = `api/attractions?page=${page}`;
     if (keyword !== null) {
         endpoint += `&keyword=${keyword}`;
     }
