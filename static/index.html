@@ -1,11 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Index</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../external/index.css">
+  <!-- <link href="{{ url_for('external', path='index.css') }}" rel="stylesheet"> -->
 </head>
+
 <body>
+  <nav>
+    <div id="navbar">
+      <h2>台北一日遊</h2>
+      <div id="login">
+        <div class="register">預定行程</div>
+        <div class="register">登入/註冊</div>
+      </div>
+    </div>
+  </nav>
   
+  <div class="hero-section">
+    <div class="searchSection">
+      <div id="mobile">輕鬆享受台北一日悠閑</div>
+      <div id="search">探索每個角落，體驗城市的深度旅遊行程</div>
+      <div class="searchDiv">
+        <form id="searchForm">
+          <input type="text" name="keyword" id="searchBox" placeholder="輸入景點名稱查詢">
+        </form>
+          <div id="searchIcon">
+            <img src="../external/icon_search.png" alt="search icon" id="searchImage">
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div id="scroll">
+      <img src="../external/left arrow.png" id="leftClick">
+      <div class="list-bar">
+        <!-- Append the MRT stations here -->
+      </div>
+      <img src="../external/right arrow.png" id="rightClick">
+    </div>
+    
+    <div class="display">
+      <div class="grid">
+        <!-- Append the attractions cards here -->
+      </div>
+    </div>
+    
+  </main>
+  <footer>
+    <p>COPYRIGHT © 2025 台北一日遊</p>
+  </footer>
+  <div id="sentinel"></div>
+  <script src="../external/index.js"></script>
+  <!-- <script src="{{ url_for('external', path='index.js') }}"></script> -->
 </body>
+
 </html>

@@ -1,5 +1,7 @@
-from fastapi import *
+from fastapi import FastAPI, Request, Query
 from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 import mysql.connector
 from typing import Annotated, List, Optional
 from starlette.middleware.sessions import SessionMiddleware
@@ -9,6 +11,10 @@ from pydantic import BaseModel
 cnx = mysql.connector.connect(**config)
 
 app=FastAPI()
+
+app.mount("/external", StaticFiles(directory="external"), name="external")
+templates = Jinja2Templates(directory="static")
+
 
 class Attraction(BaseModel):
 	id: int
@@ -63,7 +69,10 @@ async def find_attractions(request: Request, page: int = Query(), keyword: str =
 	
 	try:
 		next_page = page + 1 if len(results) == limit else None
-		data_list = [result for result in results[:-1]]
+		if len(results) == 13:
+			data_list = [result for result in results[:-1]]
+		else:
+			data_list = [result for result in results]
 			
 		response = {"nextPage":next_page, "data":data_list}
 		return JSONResponse(response, status_code=200)
