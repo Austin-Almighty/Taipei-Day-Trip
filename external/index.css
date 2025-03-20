@@ -70,7 +70,11 @@ body {
       }
       
       #mobile {
-        display: none;
+        color:#F8F8F8;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 24px;
+        letter-spacing: 0;
       }
       #search {
         color: #F8F8F8;
@@ -329,7 +333,11 @@ body {
       margin-left: 15px;
     }
     #mobile {
-        display: none;
+      color:#F8F8F8;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 24px;
+      letter-spacing: 0;
       }
     #search {
       color: #f8f8f8;

@@ -15,7 +15,6 @@ function performSearch() {
     keyword = searchKeyword;
     const gridDiv = document.querySelector('.grid');
     gridDiv.innerHTML = '';
-    // observer.disconnect();
     loadNextPage();
   }
 
@@ -29,7 +28,7 @@ searchBox.addEventListener('keydown', (event) => {
     }
   });
 
-// Render the lists of stations in the scroll bar
+
 async function renderStation(station) {
     const addMRT = document.createElement('div');
     addMRT.classList.add('stations');
@@ -39,7 +38,6 @@ async function renderStation(station) {
         keyword = station;
         const gridDiv = document.querySelector('.grid');
         gridDiv.innerHTML = '';
-        // observer.disconnect();
         loadNextPage();
     })
     listBar.appendChild(addMRT);
@@ -71,9 +69,7 @@ rightScroll.addEventListener('click', ()=>scrollClick(listBar, 30));
 
 
 async function fetchAttractions(page, keyword = null) {
-    if (page === null) {
-        return;
-    }
+
     let endpoint = `api/attractions/?page=${page}`;
     if (keyword !== null) {
         endpoint += `&keyword=${keyword}`;
@@ -88,6 +84,9 @@ async function fetchAttractions(page, keyword = null) {
 }
 
 async function renderAttractions() {
+    if (nextPage === null) {
+      return;
+    }
     const data = await fetchAttractions(nextPage, keyword);
     const dataArray = await data.data;
     nextPage = data.nextPage;
