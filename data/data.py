@@ -55,7 +55,7 @@ def write_to_db(file):
         mrt = location.get('mrt')
         lat = location.get('lat')
         lng = location.get('lng')
-        images = json.dumps(location.get('images'))
+        images = json.dump(location.get('images'))
         
         values = (row_id, name, category, description, address, transport, mrt, lat, lng, images)
         cursor.execute(query, values)
