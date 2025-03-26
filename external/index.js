@@ -93,6 +93,9 @@ async function renderAttractions() {
 
     const gridDiv = document.querySelector('.grid');
     for (let i=0; i<dataArray.length; i++) {
+        const link = document.createElement('a');
+        link.href=`/attraction/${dataArray[i].id}`;
+
         const locationDiv = document.createElement("div");
         locationDiv.classList.add("locationCard");
 
@@ -124,7 +127,8 @@ async function renderAttractions() {
         locationDiv.appendChild(attractionName);
         locationDiv.appendChild(attractionInfo);
 
-        gridDiv.appendChild(locationDiv);
+        link.appendChild(locationDiv);
+        gridDiv.appendChild(link);
     }
 }
 

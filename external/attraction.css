@@ -79,12 +79,15 @@ main {
     scroll-behavior: smooth;
     scrollbar-width: none;
     border-radius: 5px;
-    img {
-        flex: 1 0 100%;
-        scroll-snap-align: start;
-        object-fit: cover;
-        border-radius: 5px;
-    }
+    width: 540px;
+    height: 400px;
+}
+
+.slider img {
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .arrow {
@@ -133,7 +136,7 @@ main {
     background-color: darkgray;
 }
 
-.slider-nav a .selected {
+.slider-nav a.selected {
     background-color: #000000;
     opacity: 75%;
     border-style: solid;
