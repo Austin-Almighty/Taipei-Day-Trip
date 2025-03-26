@@ -355,10 +355,12 @@ a {
     }
 
     .slider img {
-        flex: 1 1 100%;
+        flex: 1 2 100%;
         scroll-snap-align: start;
         object-fit: cover;
         border-radius: 5px;
+        max-width: 100%;
+        max-height: 400px;
     }
 
     .arrow {
