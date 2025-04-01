@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Query
+from fastapi import FastAPI, Request, Query, Body
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -7,6 +7,9 @@ from typing import Annotated, List, Optional
 from starlette.middleware.sessions import SessionMiddleware
 from config import config
 from pydantic import BaseModel
+import jwt
+from datetime import datetime, timedelta, timezone
+from key import secret_key
 
 cnx = mysql.connector.connect(**config)
 
@@ -103,5 +106,35 @@ async def mrts(request: Request):
 		stations = cursor.fetchall()
 		data = [station[0] for station in stations if station[0]]
 		return JSONResponse({"data":data}, status_code=200)
+	except Exception:
+		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)
+
+# 註冊一個新的會員
+@app.post("/api/user")
+def signup(request: Request):
+	return
+
+# 取得當前的用戶資訊
+@app.get("/api/user/auth")
+def fetch_current_user():
+
+	return
+
+# 登入會員帳戶
+@app.put("/api/user/auth")
+def login(request: Request, payload: Body):
+	try:
+		cursor = cnx.cursor(dictionary=True)
+		query = "select * from users where email = %s and password = %s;"
+		# cursor.execute(query,(email, password))
+		result = cursor.fetchone()
+
+		if result:
+			expiration_time = datetime.now(tz=timezone.utc) + timedelta(days=7)
+			result["exp"] = expiration_time
+			encoded = jwt.encode(result, secret_key, algorithm="HS256")
+			return JSONResponse({"token": encoded}, status_code=200)
+		elif not result:
+			return JSONResponse({"error": True, "message": "登入失敗，帳號或密碼錯誤"}, status_code=400)
 	except Exception:
 		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)

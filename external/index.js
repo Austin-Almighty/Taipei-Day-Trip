@@ -9,6 +9,34 @@ const searchIcon = document.getElementById('searchIcon');
 const searchImage = document.getElementById('searchImage');
 const searchForm = document.getElementById('searchForm');
 
+function showDialogue(){
+  const dialogue = document.getElementById('login-dialogue');
+  dialogue.showModal();
+}
+
+function closeDialogue(){
+  const dialogue = document.getElementById("login-dialogue");
+  dialogue.close();
+}
+
+const register = document.querySelector("#login-register");
+register.addEventListener("click", showDialogue);
+
+const closeDialog = document.querySelector("dialog img");
+closeDialog.addEventListener("click", closeDialogue);
+
+
+
+async function loginAttempt(){
+  let response = await fetch('/api/user/auth', {method: 'GET'})
+}
+
+const loginButton = document.querySelector("dialog button");
+loginButton.addEventListener("click", loginAttempt)
+
+
+
+
 function performSearch() {
     let searchKeyword = searchBox.value.trim();
     nextPage = 0;
@@ -159,3 +187,6 @@ async function observeBottom(){
 }
 
 document.addEventListener("DOMContentLoaded", observeBottom);
+
+
+

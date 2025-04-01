@@ -11,7 +11,6 @@
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="../external/index.css">
-  <!-- <link href="{{ url_for('external', path='index.css') }}" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -20,10 +19,27 @@
       <h2><a href="/">台北一日遊</a></h2>
       <div id="login">
         <div class="register">預定行程</div>
-        <div class="register">登入/註冊</div>
+        <div class="register" id="login-register">登入/註冊</div>
       </div>
     </div>
   </nav>
+
+  <dialog id="login-dialogue">
+    <img src="../external/icon/icon_close.png">
+    <div>
+      <div id="decorator-bar"></div>
+      <div class="main-box">
+        <h3>輸入會員帳號</h3>
+        <form>
+          <input id="email" type="text" placeholder="輸入電子信箱"><br>
+          <input id="password" type="text" placeholder="輸入密碼">
+          <button>登入帳號</button>
+        </form>
+        <p>還沒有帳戶？點此註冊</p>
+      </div>
+    </div>
+
+  </dialog>
   
   <div class="hero-section">
     <div class="searchSection">
@@ -62,7 +78,6 @@
   </footer>
   <div id="sentinel"></div>
   <script src="../external/index.js"></script>
-  <!-- <script src="{{ url_for('external', path='index.js') }}"></script> -->
 </body>
 
 </html>
