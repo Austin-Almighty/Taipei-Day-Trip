@@ -40,7 +40,7 @@ async function loginAttempt(callback) {
     closeDialogue();
     setTimeout(() => {
         window.location.reload();
-      }, 100);
+      }, 10);
   } else {
     let data = await response.json();
     let errorMessage = data.message;

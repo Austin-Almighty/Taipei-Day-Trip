@@ -31,10 +31,12 @@ function showLogin(){
     const login = document.getElementById("signout");
     login.textContent = "登入/註冊";
     login.id = "login-register";
+    
 }
 
 function showLogout(){
     const login = document.getElementById("login-register");
+    login.removeEventListener('click', showDialogue);
     login.textContent = "登出系統";
     login.id = "signout";
     login.addEventListener("click", logoutUser);
