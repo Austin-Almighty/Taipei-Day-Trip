@@ -135,8 +135,11 @@ registerBtn.addEventListener("click", (e)=>{
     const newName = document.getElementById("newName");
     const newEmail = document.getElementById("newEmail");
     const newPassword = document.getElementById("newPassword");
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!newName.value||!newEmail.value||!newPassword.value){
-        alert("請輸入姓名、電子郵件、密碼")
+        alert("請輸入姓名、電子郵件、密碼");
+    } else if (!emailPattern.test(newEmail.value.trim())){
+      alert("請輸入有效的電子郵件地址");
     } else {
         registerNewUser(newCredentials);
     }

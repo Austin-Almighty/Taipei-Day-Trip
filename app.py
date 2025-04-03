@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Query, Body
+from fastapi import FastAPI, Request, Query, Body, Depends
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -9,7 +9,7 @@ from pydantic import BaseModel
 import jwt
 from datetime import datetime, timedelta, timezone
 from key import secret_key, algorithm
-import json
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 cnx = mysql.connector.connect(**config)
 
@@ -128,12 +128,23 @@ def signup(request: Request, payload: Annotated[dict, Body()]):
 	except Exception as e:
 		return JSONResponse({"error":True, "message":"伺服器內部錯誤"}, status_code=500)
 
-# 取得當前的用戶資訊
-@app.get("/api/user/auth")
-def fetch_current_user():
-	
-	return
 
+
+# 取得當前的用戶資訊
+bearer = HTTPBearer()
+@app.get("/api/user/auth")
+def fetch_current_user(request: Request, credentials: HTTPAuthorizationCredentials = Depends(bearer)):
+	try:
+		token = credentials.credentials
+		payload = jwt.decode(token, secret_key, algorithms=algorithm)
+		user_data = {
+			"id":payload.get("userID"),
+			"name": payload.get("name"),
+			"email": payload.get("email")
+		}
+		return JSONResponse({"data":user_data}, status_code=200)
+	except jwt.InvalidTokenError:
+		return JSONResponse(None, status_code=200)
 # 登入會員帳戶
 @app.put("/api/user/auth")
 def login(request: Request, payload: Annotated[dict, Body()]):
