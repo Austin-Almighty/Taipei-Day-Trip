@@ -164,6 +164,7 @@ def login(request: Request, payload: Annotated[dict, Body()]):
 			return JSONResponse({"token": encoded}, status_code=200)
 		elif not result:
 			return JSONResponse({"error": True, "message": "登入失敗，帳號或密碼錯誤"}, status_code=400)
-	except Exception:
+	except Exception as e:
+		print("login error:", e)
 		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)
 
