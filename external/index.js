@@ -9,6 +9,8 @@ const searchIcon = document.getElementById('searchIcon');
 const searchImage = document.getElementById('searchImage');
 const searchForm = document.getElementById('searchForm');
 
+
+
 function performSearch() {
     let searchKeyword = searchBox.value.trim();
     nextPage = 0;
@@ -141,18 +143,24 @@ async function loadNextPage() {
   isFetching = false;
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          loadNextPage();
-        }
-      });
+
+
+
+async function observeBottom(){
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if (entry.isIntersecting) loadNextPage();
     }, {
-      root: null,
-      threshold: 1.0
-    });
-    
-    const sentinel = document.getElementById("sentinel");
-    observer.observe(sentinel);
+      threshold: 1
+    }
+  );
   });
+
+  const sentinel = document.getElementById("sentinel");
+  observer.observe(sentinel);
+}
+
+document.addEventListener("DOMContentLoaded", observeBottom);
+
+
+

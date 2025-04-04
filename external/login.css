@@ -1,0 +1,155 @@
+@media (min-width: 1201px) and (max-width: 1920px){
+  dialog {
+    width: 340px;
+    min-height: 290px;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    border-width: 0;
+    position:fixed;
+    left: 50%;
+    top: 80px;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+
+    img {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 26px;
+      left: 307px;
+    }
+
+    #decorator-bar {
+      background-color: #337788;
+      height: 10px;
+      width: 100%;
+    }
+
+    .main-box {
+      box-sizing: border-box;
+      margin: 15px;
+      justify-items: center;
+      width: 310px;
+      min-height: 234px;
+      height: fit-content;
+      h3 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+        color: rgba(102, 102, 102, 1);
+        margin-bottom: 15px;
+      }
+    }
+    input{
+      box-sizing: border-box;
+      width: 310px;
+      height: 47px;
+      border: 1px, solid, rgba(204, 204, 204, 1);
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+
+    button{
+      width: 310px;
+      height: 46px;
+      background-color: rgba(68, 136, 153, 1);
+      border-radius: 5px;
+      color: rgba(255, 255, 255, 1);
+      border: none;
+    }
+
+    p{
+      color: rgba(102, 102, 102, 1);
+      font-weight: 500;
+      font-size: 16px;
+    }
+  }
+
+
+  dialog::backdrop{
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+
+}
+
+@media (min-width: 360px) and (max-width: 1200px) {
+  dialog {
+    width: 340px;
+    min-width: 340px;
+    min-height: 290px;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    border-width: 0;
+    position:fixed;
+    left: 50%;
+    top: 80px;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+
+    img {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 26px;
+      left: 307px;
+    }
+
+    #decorator-bar {
+      background-color: #337788;
+      height: 10px;
+      width: 100%;
+    }
+
+    .main-box {
+      box-sizing: border-box;
+      margin: 15px;
+      justify-items: center;
+      width: 310px;
+      min-height: 234px;
+      height: fit-content;
+      h3 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+        color: rgba(102, 102, 102, 1);
+        margin-bottom: 15px;
+      }
+    }
+    input{
+      box-sizing: border-box;
+      width: 310px;
+      height: 47px;
+      border: 1px, solid, rgba(204, 204, 204, 1);
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+
+    button{
+      width: 310px;
+      height: 46px;
+      background-color: rgba(68, 136, 153, 1);
+      border-radius: 5px;
+      color: rgba(255, 255, 255, 1);
+      border: none;
+    }
+
+    p{
+      color: rgba(102, 102, 102, 1);
+      font-weight: 500;
+      font-size: 16px;
+    }
+  }
+
+
+  dialog::backdrop{
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+
+}
+

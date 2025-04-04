@@ -1,12 +1,15 @@
-from fastapi import FastAPI, Request, Query
+from fastapi import FastAPI, Request, Query, Body, Depends
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import mysql.connector
 from typing import Annotated, List, Optional
-from starlette.middleware.sessions import SessionMiddleware
 from config import config
 from pydantic import BaseModel
+import jwt
+from datetime import datetime, timedelta, timezone
+from key import secret_key, algorithm
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 cnx = mysql.connector.connect(**config)
 
@@ -105,3 +108,63 @@ async def mrts(request: Request):
 		return JSONResponse({"data":data}, status_code=200)
 	except Exception:
 		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)
+
+# 註冊一個新的會員
+@app.post("/api/user")
+def signup(request: Request, payload: Annotated[dict, Body()]):
+	try:
+		name = payload.get("name")
+		email = payload.get("email")
+		password = payload.get("password")
+		query = "insert into users (name, email, password) values (%s, %s, %s);"
+		cursor = cnx.cursor(dictionary=True)
+		cursor.execute(query, (name, email, password))
+		cnx.commit()
+		return JSONResponse({"ok": True}, status_code=200)
+	except mysql.connector.IntegrityError as e:
+		if e.errno == 1062:
+			return JSONResponse({"error": True, "message": "此Email已被註冊過了"}, status_code=400)
+		return JSONResponse({"error":True, "message":"註冊失敗"}, status_code=400)
+	except Exception as e:
+		return JSONResponse({"error":True, "message":"伺服器內部錯誤"}, status_code=500)
+
+
+
+# 取得當前的用戶資訊
+bearer = HTTPBearer()
+@app.get("/api/user/auth")
+def fetch_current_user(request: Request, credentials: HTTPAuthorizationCredentials = Depends(bearer)):
+	try:
+		token = credentials.credentials
+		payload = jwt.decode(token, secret_key, algorithms=algorithm)
+		user_data = {
+			"id":payload.get("userID"),
+			"name": payload.get("name"),
+			"email": payload.get("email")
+		}
+		return JSONResponse({"data":user_data}, status_code=200)
+	except jwt.InvalidTokenError:
+		return JSONResponse(None, status_code=200)
+# 登入會員帳戶
+@app.put("/api/user/auth")
+def login(request: Request, payload: Annotated[dict, Body()]):
+	try:
+		payload = payload
+		email = payload.get("email")
+		password = payload.get("password")
+		query = "select * from users where email = %s and password = %s;"
+		cursor = cnx.cursor(dictionary=True)
+		cursor.execute(query,(email, password))
+		result = cursor.fetchone() 
+
+		if result:
+			expiration_time = datetime.now(tz=timezone.utc) + timedelta(days=7)
+			result["exp"] = expiration_time
+			encoded = jwt.encode(result, secret_key, algorithm=algorithm)
+			return JSONResponse({"token": encoded}, status_code=200)
+		elif not result:
+			return JSONResponse({"error": True, "message": "登入失敗，帳號或密碼錯誤"}, status_code=400)
+	except Exception as e:
+		print("login error:", e)
+		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)
+
