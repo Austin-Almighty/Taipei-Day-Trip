@@ -10,6 +10,8 @@ import jwt
 from datetime import datetime, timedelta, timezone
 from key import secret_key, algorithm
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import argon2
+from argon2 import PasswordHasher
 
 cnx = mysql.connector.connect(**config)
 
@@ -18,6 +20,7 @@ app=FastAPI()
 app.mount("/external", StaticFiles(directory="external"), name="external")
 templates = Jinja2Templates(directory="static")
 
+ph = PasswordHasher()
 
 class Attraction(BaseModel):
 	id: int
@@ -40,6 +43,8 @@ class AttractionResponse(BaseModel):
 
 class MrtResponse(BaseModel):
 	data: List[str]
+
+# class 
 
 # Static Pages (Never Modify Code in this Block)
 @app.get("/", include_in_schema=False)
@@ -116,9 +121,10 @@ def signup(request: Request, payload: Annotated[dict, Body()]):
 		name = payload.get("name")
 		email = payload.get("email")
 		password = payload.get("password")
+		hashed_password = ph.hash(password)
 		query = "insert into users (name, email, password) values (%s, %s, %s);"
 		cursor = cnx.cursor(dictionary=True)
-		cursor.execute(query, (name, email, password))
+		cursor.execute(query, (name, email, hashed_password))
 		cnx.commit()
 		return JSONResponse({"ok": True}, status_code=200)
 	except mysql.connector.IntegrityError as e:
@@ -149,22 +155,23 @@ def fetch_current_user(request: Request, credentials: HTTPAuthorizationCredentia
 @app.put("/api/user/auth")
 def login(request: Request, payload: Annotated[dict, Body()]):
 	try:
-		payload = payload
 		email = payload.get("email")
 		password = payload.get("password")
-		query = "select * from users where email = %s and password = %s;"
+		query = "select * from users where email = %s;"
 		cursor = cnx.cursor(dictionary=True)
-		cursor.execute(query,(email, password))
+		cursor.execute(query,(email,))
 		result = cursor.fetchone() 
+		hash_db = result['password']
 
-		if result:
+		if ph.verify(hash_db, password):
 			expiration_time = datetime.now(tz=timezone.utc) + timedelta(days=7)
 			result["exp"] = expiration_time
 			encoded = jwt.encode(result, secret_key, algorithm=algorithm)
 			return JSONResponse({"token": encoded}, status_code=200)
 		elif not result:
 			return JSONResponse({"error": True, "message": "登入失敗，帳號或密碼錯誤"}, status_code=400)
+	except argon2.exceptions.VerifyMismatchError:
+			return JSONResponse({"error": True, "message": "登入失敗，帳號或密碼錯誤"}, status_code=400)
 	except Exception as e:
-		print("login error:", e)
 		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)
 
