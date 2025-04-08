@@ -44,7 +44,16 @@ class AttractionResponse(BaseModel):
 class MrtResponse(BaseModel):
 	data: List[str]
 
-# class 
+class newUser(BaseModel):
+	name: str
+	email: str
+	password: str
+
+class newBooking(BaseModel):
+	attractionID: int
+	date: str
+	time: str
+	price: int
 
 # Static Pages (Never Modify Code in this Block)
 @app.get("/", include_in_schema=False)
@@ -116,11 +125,12 @@ async def mrts(request: Request):
 
 # 註冊一個新的會員
 @app.post("/api/user")
-def signup(request: Request, payload: Annotated[dict, Body()]):
+# def signup(request: Request, new_user: Annotated[dict, Body()]):
+def signup(request: Request, new_user: newUser):
 	try:
-		name = payload.get("name")
-		email = payload.get("email")
-		password = payload.get("password")
+		name = new_user.name
+		email = new_user.email
+		password = new_user.password
 		hashed_password = ph.hash(password)
 		query = "insert into users (name, email, password) values (%s, %s, %s);"
 		cursor = cnx.cursor(dictionary=True)
@@ -151,6 +161,7 @@ def fetch_current_user(request: Request, credentials: HTTPAuthorizationCredentia
 		return JSONResponse({"data":user_data}, status_code=200)
 	except jwt.InvalidTokenError:
 		return JSONResponse(None, status_code=200)
+	
 # 登入會員帳戶
 @app.put("/api/user/auth")
 def login(request: Request, payload: Annotated[dict, Body()]):
@@ -174,4 +185,29 @@ def login(request: Request, payload: Annotated[dict, Body()]):
 			return JSONResponse({"error": True, "message": "登入失敗，帳號或密碼錯誤"}, status_code=400)
 	except Exception as e:
 		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)
+	
+# 取得尚未確認的預定行程
+@app.get("/api/booking")
+def retrieve_unfinished_booking(request: Request):
+	
+	return JSONResponse({})
+
+# 建立新的預定行程
+@app.post("/api/booking")
+def create_booking(request: Request, request_body: newBooking):
+	attractionID = request_body.attractionID
+	date = request_body.date
+	time = request_body.time
+	price = request_body.price
+
+	query = ""
+	cursor = cnx.cursor(dictionary=True)
+
+	return
+
+# 刪除目前的預定行程
+@app.delete("/api/booking")
+def delete_booking(request: Request,):
+	return
+
 
