@@ -3,6 +3,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import mysql.connector
+from mysql.connector import Error
 from typing import Annotated, List, Optional
 from config import config
 from pydantic import BaseModel
@@ -12,6 +13,7 @@ from key import secret_key, algorithm
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 import argon2
 from argon2 import PasswordHasher
+import json
 
 cnx = mysql.connector.connect(**config)
 
@@ -188,26 +190,75 @@ def login(request: Request, payload: Annotated[dict, Body()]):
 	
 # 取得尚未確認的預定行程
 @app.get("/api/booking")
-def retrieve_unfinished_booking(request: Request):
-	
-	return JSONResponse({})
+def retrieve_unfinished_booking(request: Request, credentials: HTTPAuthorizationCredentials = Depends(bearer)):
+	try:
+		token = credentials.credentials
+		decoded_token = jwt.decode(token, secret_key, algorithms=algorithm)
+		user_id = decoded_token.get("userID")
+		booking_query = "select * from booking where userID = %s;"
+		cursor = cnx.cursor(dictionary=True)
+		cursor.execute(booking_query, (user_id,))
+		current_booking = cursor.fetchone()
+		date = current_booking.get("date")
+		time = current_booking.get("time")
+		price = current_booking.get("price")
+		cursor.close()
+		if (current_booking == None):
+			return JSONResponse(None)
+		attractionID = current_booking["attractionID"]
+		attraction_info_query = "select id, name, address, images from attractions where id = %s;"
+		cursor = cnx.cursor(dictionary=True)
+		cursor.execute(attraction_info_query, (attractionID,))
+		attraction_info = cursor.fetchone()
+		cursor.close()
+		urls = json.loads(attraction_info["images"])
+		first_image = urls[0]
+		attraction_info["images"] = first_image
+		return JSONResponse({"data":{"attraction":attraction_info, "date": date, "time": time, "price": price}})
+	except jwt.InvalidTokenError:
+		return JSONResponse({"error": True, "message":"未登入系統，拒絕存取"}, status_code=403)
 
 # 建立新的預定行程
 @app.post("/api/booking")
-def create_booking(request: Request, request_body: newBooking):
-	attractionID = request_body.attractionID
-	date = request_body.date
-	time = request_body.time
-	price = request_body.price
+def create_booking(request: Request, request_body: newBooking, credentials: HTTPAuthorizationCredentials = Depends(bearer)):
+	try:
+		attractionID = request_body.attractionID
+		date = request_body.date
+		time = request_body.time
+		price = request_body.price
 
-	query = ""
-	cursor = cnx.cursor(dictionary=True)
+		token = credentials.credentials
+		decoded_token = jwt.decode(token, secret_key, algorithms=algorithm)
+		user_id = decoded_token.get("userID")
 
-	return
+		query = "insert into booking (attractionID, date, time, price, userID) values (%s, %s, %s, %s, %s);"
+		cursor = cnx.cursor(dictionary=True)
+		cursor.execute(query, (attractionID, date, time, price, user_id))
+		cnx.commit()
+		return JSONResponse({"ok": True}, status_code=200)
+	except mysql.connector.Error as mysqlerror:
+		return JSONResponse({"error": True, "message": mysqlerror}, status_code=400)
+	except jwt.InvalidTokenError:
+		return JSONResponse({"error": True, "message": "未登入系統，拒絕存取"}, status_code=403)
+	except Exception as e:
+		return JSONResponse({"error": True, "message": e}, status_code=500)
+
+
+	
 
 # 刪除目前的預定行程
 @app.delete("/api/booking")
-def delete_booking(request: Request,):
-	return
+def delete_booking(request: Request, credentials: HTTPAuthorizationCredentials = Depends(bearer)):
+	try: 
+		token = credentials.credentials
+		decoded_token = jwt.decode(token, secret_key, algorithms=algorithm)
+		user_id = decoded_token.get("userID")
 
+		query = "delete from booking where userID = %s;"
+		cursor = cnx.cursor(dictionary=True)
+		cursor.execute(query, (user_id,))
+		cnx.commit()
+		return JSONResponse({"ok": True})
+	except jwt.InvalidTokenError:
+		return JSONResponse({"error": True, "message": "未登入系統，拒絕存取"}, status_code=403)
 
