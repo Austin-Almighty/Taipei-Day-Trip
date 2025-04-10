@@ -18,6 +18,7 @@ async function checkStatus(){
         let data = await response.json();
         if (data){
             showLogout();
+            localStorage.setItem("userName", data.data.name);
         } else {
             showLogin();
         }

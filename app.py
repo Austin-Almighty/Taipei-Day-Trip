@@ -201,7 +201,7 @@ def retrieve_unfinished_booking(request: Request, credentials: HTTPAuthorization
 		current_booking = cursor.fetchone()
 		if (current_booking == None):
 			return JSONResponse(None)
-		date = current_booking.get("date")
+		date = current_booking.get("date").isoformat() #Needed to turn the date object into a string, or it will fail the JSONResponse
 		time = current_booking.get("time")
 		price = current_booking.get("price")
 		cursor.close()
@@ -232,13 +232,28 @@ def create_booking(request: Request, request_body: newBooking, credentials: HTTP
 		decoded_token = jwt.decode(token, secret_key, algorithms=algorithm)
 		user_id = decoded_token.get("userID")
 
-		query = "insert into booking (attractionID, date, time, price, userID) values (%s, %s, %s, %s, %s);"
+		booking_query = "select * from booking where userID = %s;"
 		cursor = cnx.cursor(dictionary=True)
-		cursor.execute(query, (attractionID, date, time, price, user_id))
-		cnx.commit()
-		return JSONResponse({"ok": True}, status_code=200)
+		cursor.execute(booking_query, (user_id,))
+		current_booking = cursor.fetchone()
+		cursor.close()
+
+		if current_booking:
+			update_query = "update booking set attractionID = %s, date = %s, time = %s, price = %s where userID = %s"
+			cursor = cnx.cursor(dictionary=True)
+			cursor.execute(update_query, (attractionID, date, time, price, user_id))
+			cnx.commit()
+			cursor.close()
+			return JSONResponse({"ok":True}, status_code=200)
+		else:
+			query = "insert into booking (attractionID, date, time, price, userID) values (%s, %s, %s, %s, %s);"
+			cursor = cnx.cursor(dictionary=True)
+			cursor.execute(query, (attractionID, date, time, price, user_id))
+			cnx.commit()
+			cursor.close()
+			return JSONResponse({"ok": True}, status_code=200)
 	except mysql.connector.Error as mysqlerror:
-		return JSONResponse({"error": True, "message": mysqlerror}, status_code=400)
+		return JSONResponse({"error": True, "message": str(mysqlerror)}, status_code=400)
 	except jwt.InvalidTokenError:
 		return JSONResponse({"error": True, "message": "未登入系統，拒絕存取"}, status_code=403)
 	except Exception as e:
