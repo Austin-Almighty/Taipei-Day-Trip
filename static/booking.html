@@ -1,11 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Booking</title>
+  <link rel="stylesheet" href="../external/booking.css">
+  <link rel="stylesheet" href="../external/login.css">
 </head>
+
 <body>
-  
+  <nav>
+    <div id="navbar">
+      <h2><a href="/">台北一日遊</a></h2>
+      <div id="login">
+        <div class="register" id="login-book">預定行程</div>
+        <div class="register" id="login-register"></div>
+      </div>
+    </div>
+  </nav>
+
+  <dialog id="login-dialogue">
+    <img src="../external/icon/icon_close.png">
+    <div>
+      <div id="decorator-bar"></div>
+      <div class="main-box">
+        <h3>輸入會員帳號</h3>
+        <form>
+          <input id="email" type="text" placeholder="輸入電子信箱"><br>
+          <input id="password" type="password" placeholder="輸入密碼">
+          <button>登入帳號</button>
+        </form>
+        <p>還沒有帳戶？<span id="moveToRegister">點此註冊</span></p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="signup-dialog">
+    <img src="../external/icon/icon_close.png">
+    <div>
+      <div id="decorator-bar"></div>
+      <div class="main-box">
+        <h3>註冊會員帳號</h3>
+        <form>
+          <input type="text" placeholder="輸入姓名" id="newName"><br>
+          <input type="text" placeholder="輸入電子郵件" id="newEmail"><br>
+          <input type="password" placeholder="輸入密碼" id="newPassword"><br>
+          <button>註冊新帳戶</button>
+        </form>
+        <p>已經有帳戶了？<span id="moveToLogin">點此登入</span></p>
+      </div>
+    </div>
+  </dialog>
+
+  <section id="booking">
+    <h3>您好，<span id="userName">Austin</span>，待預訂的行程如下：</h3>
+    <div class="infographic hidden">
+      <img src="https://picsum.photos/400" id="mainImage">
+      <div class="attractionInfo">
+        <h4>台北一日遊：<span id="attractionName">平安鐘</span></h4>
+        <img src="../external/icon/icon/icon_delete.png">
+        <p id="bookingDate"><span class="title">日期：</span>2021-04-23</p>
+        <p id="bookingTime"><span class="title">時間：</span>早上9點到下午4點</p>
+        <p><span class="title">費用：</span>新台幣<span id="tourCost">2000</span>元</p>
+        <p id="address"><span class="title">地點：</span>台北市大安區忠孝東路</p>
+      </div>
+    </div>
+  </section>
+  <hr class="hidden">
+  <section id="contact" class="hidden">
+    <h3>您的聯絡資訊</h3>
+    <div class="subtitle"><span class="title">聯絡姓名：</span><input type="text" name="contact-name" placeholder="輸入您的姓名"
+        autocomplete="name"></div>
+    <div class="subtitle"><span class="title">聯絡信箱：</span><input type="email" name="contact-email"
+        placeholder="輸入您的電子郵件" autocomplete="email"></div>
+    <div class="subtitle"><span class="title">手機號碼：</span><input type="tel" name="contact-phone" placeholder="輸入您的手機號碼"
+        inputmode="tel" autocomplete="tel"></div>
+    <h4>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</h4>
+  </section>
+  <hr class="hidden">
+  <section id="payment" class="hidden">
+    <h3>信用卡付款資訊</h3>
+    <div class="subtitle"><span class="title">卡片號碼：</span><input type="text" inputmode="numeric" maxlength="19"
+        placeholder="**** **** **** ****"></div>
+    <div class="subtitle"><span class="title">過期時間：</span><input type="text" inputmode="numeric" maxlength="5"
+        placeholder="MM/YY"></div>
+    <div class="subtitle"><span class="title">驗證密碼：</span><input type="text" inputmode="numeric" maxlength="4"
+        placeholder="CVV"></div>
+  </section>
+  <hr class="hidden">
+  <div class="confirm hidden">
+    <h4>總價：新台幣<span id="finalPrice">2000</span>元</h4>
+    <button>確認訂購並付款</button>
+  </div>
+  <footer>
+    <p>COPYRIGHT © 2025 台北一日遊</p>
+  </footer>
 </body>
+<script src="../external/login.js"></script>
+<script src="../external/credential.js"></script>
+<script src="../external/bookingBtn.js"></script>
+<script src="../external/booking.js"></script>
+
 </html>

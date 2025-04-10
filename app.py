@@ -199,12 +199,13 @@ def retrieve_unfinished_booking(request: Request, credentials: HTTPAuthorization
 		cursor = cnx.cursor(dictionary=True)
 		cursor.execute(booking_query, (user_id,))
 		current_booking = cursor.fetchone()
+		if (current_booking == None):
+			return JSONResponse(None)
 		date = current_booking.get("date")
 		time = current_booking.get("time")
 		price = current_booking.get("price")
 		cursor.close()
-		if (current_booking == None):
-			return JSONResponse(None)
+		
 		attractionID = current_booking["attractionID"]
 		attraction_info_query = "select id, name, address, images from attractions where id = %s;"
 		cursor = cnx.cursor(dictionary=True)

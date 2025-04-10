@@ -127,4 +127,4 @@ radioButtons.forEach(option => {
   })
 })
 
-renderAPI();
+window.addEventListener('DOMContentLoaded', renderAPI);
