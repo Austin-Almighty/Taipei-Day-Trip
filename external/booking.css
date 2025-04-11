@@ -164,6 +164,11 @@ a {
             vertical-align: middle;
             width: 180px;
             height: 18px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: rgba(232, 232, 232, 1);
+            border-radius: 5px;
+            padding:10px;
         }
 
     }
