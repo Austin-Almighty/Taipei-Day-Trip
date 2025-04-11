@@ -1,5 +1,5 @@
-const bookingBtn = document.getElementById("login-book");
-bookingBtn.addEventListener("click", startBooking);
+const bookingLogin = document.getElementById("login-book");
+bookingLogin.addEventListener("click", startBooking);
 
 
 function startBooking() {
