@@ -1,5 +1,8 @@
 let id = "";
 
+window.addEventListener('DOMContentLoaded', renderAPI);
+
+
 function setId() {
   let urlPath = window.location.pathname;
   let path = urlPath.split('/');
@@ -109,8 +112,6 @@ function setupObserver(){
 }
 
 
-
-
 const morning = document.getElementById('morning');
 const afternoon = document.getElementById('afternoon');
 const cost = document.getElementById('cost');
@@ -127,4 +128,53 @@ radioButtons.forEach(option => {
   })
 })
 
-renderAPI();
+
+
+const dateInput = document.getElementById("datePicker");
+const today = new Date().toISOString().split("T")[0];
+dateInput.min = today;
+
+async function sendBooking() {
+  let token = localStorage.getItem("jwtToken");
+  const date = document.getElementById("datePicker").value;
+  const selectedTime = document.querySelector('input[name="radioPicker"]:checked').value;
+  const price = (selectedTime === 'morning') ? 2000 : 2500;
+  let response = await fetch('/api/booking', {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      attractionID: Number(id),
+      date: date,
+      time: selectedTime,
+      price: price
+    })
+  });
+  if (response.ok) {
+    window.location.href = "/booking";
+  } 
+}
+
+
+function createNewBooking() {
+  let token = localStorage.getItem("jwtToken");
+  if (token) {
+    const date = document.getElementById("datePicker").value;
+    if (date === "") {
+      alert("請選擇日期");
+      return;
+    } else {
+      sendBooking();
+    }
+  } else {
+    showDialogue();
+  }
+}
+
+const bookingBtn = document.getElementById("bookingBtn");
+bookingBtn.addEventListener("click", createNewBooking)
+
+
+

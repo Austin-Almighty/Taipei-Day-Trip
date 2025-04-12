@@ -18,6 +18,7 @@ async function checkStatus(){
         let data = await response.json();
         if (data){
             showLogout();
+            localStorage.setItem("userName", data.data.name);
         } else {
             showLogin();
         }
@@ -28,6 +29,11 @@ async function checkStatus(){
 
 
 function showLogin(){
+    const current = document.getElementById("login-register");
+    if (current) {
+        current.textContent = "登入/註冊";
+        return;
+    }
     const login = document.getElementById("signout");
     login.textContent = "登入/註冊";
     login.id = "login-register";

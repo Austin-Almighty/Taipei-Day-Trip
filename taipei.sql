@@ -49,6 +49,38 @@ INSERT INTO `attractions` VALUES (1,'新北投溫泉區','養生溫泉','北投�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `booking`
+--
+
+DROP TABLE IF EXISTS `booking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `booking` (
+  `bookingID` int NOT NULL AUTO_INCREMENT,
+  `attractionID` int DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `time` varchar(9) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `userID` int DEFAULT NULL,
+  PRIMARY KEY (`bookingID`),
+  UNIQUE KEY `userID` (`userID`),
+  KEY `attractionID` (`attractionID`),
+  CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`attractionID`) REFERENCES `attractions` (`id`),
+  CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booking`
+--
+
+LOCK TABLES `booking` WRITE;
+/*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+INSERT INTO `booking` VALUES (6,4,'2025-04-30','afternoon',2500,15);
+/*!40000 ALTER TABLE `booking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -62,7 +94,7 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +103,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Austin','123@gmail.com','123456'),(9,'廖祥廷','tim479863@gmail.com','a267198479136'),(10,'pica','pica@gmail.com','pica');
+INSERT INTO `users` VALUES (1,'Austin','123@gmail.com','123456'),(9,'廖祥廷','tim479863@gmail.com','a267198479136'),(10,'pica','pica@gmail.com','pica'),(11,'jenny','jenny7170@gmail.com','jenny'),(12,'test','test@gmail.com','test'),(13,'test2','test2@gmail.com','$argon2id$v=19$m=65536,t=3,p=4$nFajkEYnLJiDLHftO26iCg$yj+UbsfkE5bJeOahQ8U1sYHRVlpjh9I+efxUROAxNf4'),(14,'test3','test3@gmail.com','$argon2id$v=19$m=65536,t=3,p=4$CuSHBEtf++Qkscv7gq3/oQ$JBsnBWv0Qjaecm+PwX+P2AvYWHbxjPRTH+38RDRh9VU'),(15,'test4','test4@gmail.com','$argon2id$v=19$m=65536,t=3,p=4$2vSENTk5tQxOCngW2zELVw$jFIncf+d81Hiq77+J6qKMeZCQuzdShBw7OnDmyE63Nw');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -84,4 +116,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-02 22:27:15
+-- Dump completed on 2025-04-10 17:11:57
