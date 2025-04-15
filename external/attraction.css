@@ -12,7 +12,7 @@ a {
 }
 
 
-@media (min-width: 1201px) and (max-width: 1920px){
+@media (min-width: 1201px) and (max-width: 1920px) {
 
     nav {
         display: flex;
@@ -56,6 +56,11 @@ a {
         font-size: 16px;
         line-height: 13.3px;
         letter-spacing: 0;
+    }
+
+    .register:hover {
+        background-color: hsl(0, 0%, 30%);
+        cursor: pointer;
     }
 
 
@@ -102,6 +107,7 @@ a {
         top: 50%;
         left: 10px;
         width: 96%;
+
         img {
             width: 36px;
             height: 36px;
@@ -131,6 +137,7 @@ a {
         opacity: 75%;
         transition: opacity ease 250ms;
     }
+
     .slider-nav a:hover {
         opacity: 1;
     }
@@ -173,26 +180,31 @@ a {
         position: relative;
         padding: 5px 20px;
         color: #666666;
-        
+
         label {
             font-weight: 400;
             line-height: 13.3px;
             vertical-align: middle;
             font-size: 16px;
         }
+
         input {
             vertical-align: middle;
             line-height: 13.3px;
             font-size: 16px;
         }
 
-        h3, span {
+        h3,
+        span {
             font-weight: 700;
             vertical-align: middle;
         }
 
 
-        h3, p, form, span {
+        h3,
+        p,
+        form,
+        span {
             margin-bottom: 15px;
         }
 
@@ -213,7 +225,7 @@ a {
         input[type="radio"]:checked {
             background-color: #448899;
             border-color: #FFFFFF;
-            border-style: solid ;
+            border-style: solid;
         }
 
         button {
@@ -247,6 +259,7 @@ a {
             size: 16px;
             margin: 0;
         }
+
         p {
             margin-top: 0.5rem;
         }
@@ -269,7 +282,7 @@ a {
         justify-content: center;
         align-items: center;
     }
-    
+
     footer p {
         font-size: 16px;
         font-weight: 700;
@@ -295,8 +308,8 @@ a {
         z-index: 100;
         background-color: #ffffff;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      
+    }
+
     #navbar {
         display: flex;
         justify-content: space-between;
@@ -305,8 +318,8 @@ a {
         margin: 0 auto;
         text-align: center;
         align-items: center;
-      }
-      
+    }
+
     #navbar h2 {
         color: #448899;
         font-size: 30px;
@@ -314,21 +327,27 @@ a {
         letter-spacing: 0;
         font-weight: 700;
         padding-left: 10px;
-      }
-      
+    }
+
     nav #login {
         display: flex;
         align-items: center;
-      }
-      
+    }
+
     .register {
         font-weight: 500;
         padding: 10px;
         font-size: 16px;
         line-height: 13.3px;
         letter-spacing: 0;
-      }
-    
+    }
+
+    .register:hover {
+        background-color: hsl(0, 0%, 30%);
+        cursor: pointer;
+    }
+
+
     main {
         justify-items: center;
     }
@@ -373,11 +392,12 @@ a {
 
     .arrow {
         display: flex;
-        justify-content:space-between;
+        justify-content: space-between;
         z-index: 2;
         position: absolute;
         top: 50%;
         width: 100%;
+
         img {
             width: 36px;
             height: 36px;
@@ -407,6 +427,7 @@ a {
         opacity: 75%;
         transition: opacity ease 250ms;
     }
+
     .slider-nav a:hover {
         opacity: 1;
     }
@@ -470,26 +491,31 @@ a {
         padding: 15px 20px;
         margin: 0 10px;
         color: #666666;
-        
+
         label {
             font-weight: 400;
             line-height: 13.3px;
             vertical-align: middle;
             font-size: 16px;
         }
+
         input {
             vertical-align: middle;
             line-height: 1rem;
             font-size: 16px;
         }
 
-        h3, span {
+        h3,
+        span {
             font-weight: 700;
             vertical-align: middle;
         }
 
 
-        h3, p, form, span {
+        h3,
+        p,
+        form,
+        span {
             margin-bottom: 15px;
         }
 
@@ -511,7 +537,7 @@ a {
             background-color: #448899;
             border-width: 2px;
             border-color: #FFFFFF;
-            border-style: solid ;
+            border-style: solid;
         }
 
         button {
@@ -554,6 +580,7 @@ a {
             size: 16px;
             margin: 0;
         }
+
         p {
             margin-top: 0.5rem;
         }
@@ -569,7 +596,7 @@ a {
         justify-content: center;
         align-items: center;
     }
-    
+
     footer p {
         font-size: 16px;
         font-weight: 700;
@@ -599,8 +626,8 @@ a {
         background-color: #ffffff;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         height: 54px;
-      }
-      
+    }
+
     #navbar {
         display: flex;
         justify-content: space-between;
@@ -608,8 +635,8 @@ a {
         margin: 0 auto;
         text-align: center;
         align-items: center;
-      }
-      
+    }
+
     #navbar h2 {
         color: #448899;
         font-size: 30px;
@@ -617,21 +644,26 @@ a {
         letter-spacing: 0;
         font-weight: 700;
         padding-left: 10px;
-      }
-      
+    }
+
     nav #login {
         display: flex;
         align-items: center;
-      }
-      
+    }
+
     .register {
         font-weight: 500;
         padding: 10px;
         font-size: 16px;
         line-height: 13.3px;
         letter-spacing: 0;
+    }
+
+    .register:hover {
+        background-color: hsl(0, 0%, 70%);
+        cursor: pointer;
       }
-    
+
     main {
         justify-items: center;
     }
@@ -674,11 +706,12 @@ a {
 
     .arrow {
         display: flex;
-        justify-content:space-between;
+        justify-content: space-between;
         z-index: 2;
         position: absolute;
         top: 50%;
         width: 100%;
+
         img {
             width: 36px;
             height: 36px;
@@ -708,6 +741,7 @@ a {
         opacity: 75%;
         transition: opacity ease 250ms;
     }
+
     .slider-nav a:hover {
         opacity: 1;
     }
@@ -734,7 +768,7 @@ a {
     #name {
         min-height: 90px;
         width: 100%;
-    
+
     }
 
     #name h3 {
@@ -768,34 +802,40 @@ a {
         /* position: relative; */
         padding: 15px 20px;
         color: #666666;
-        
+
         label {
             font-weight: 400;
             line-height: 13.3px;
             vertical-align: middle;
             font-size: 16px;
         }
+
         input {
             vertical-align: middle;
             line-height: 1rem;
             font-size: 16px;
         }
-        
-        
-        h3, span {
+
+
+        h3,
+        span {
             font-weight: 700;
             vertical-align: middle;
             font-size: 16px;
             line-height: 13.3px;
             letter-spacing: 0;
         }
+
         p {
             font-weight: 400;
             size: 16px;
             vertical-align: middle;
         }
 
-        h3, p, form, span {
+        h3,
+        p,
+        form,
+        span {
             margin-bottom: 15px;
         }
 
@@ -816,7 +856,7 @@ a {
         input[type="radio"]:checked {
             background-color: #448899;
             border-color: #FFFFFF;
-            border-style: solid ;
+            border-style: solid;
             border-width: 2px;
         }
 
@@ -862,6 +902,7 @@ a {
             font-size: 16px;
             margin: 0;
         }
+
         p {
             margin-top: 0.5rem;
             font-size: 16px;
@@ -878,7 +919,7 @@ a {
         justify-content: center;
         align-items: center;
     }
-    
+
     footer p {
         font-size: 16px;
         font-weight: 700;

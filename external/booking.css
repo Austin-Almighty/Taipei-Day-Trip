@@ -62,6 +62,19 @@ a {
         letter-spacing: 0;
     }
 
+    .register:hover {
+        background-color: hsl(0, 0%, 30%);
+        cursor: pointer;
+      }
+    
+
+    #login-book:hover #login-register:hover{
+        background-color: hsl(0, 0%, 30%);
+        cursor: pointer;;
+    }
+
+
+
     section {
         max-width: 1000px;
         padding: 10px;
@@ -123,13 +136,7 @@ a {
             letter-spacing: 0;
         }
 
-        .title {
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 13.3px;
-            letter-spacing: 0%;
-            vertical-align: middle;
-        }
+      
 
         p {
             font-weight: 400;
@@ -154,24 +161,45 @@ a {
         .subtitle {
             margin-bottom: 15px;
         }
-
-        input {
-            font-family: Noto Sans TC;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 13.3px;
-            letter-spacing: 0%;
-            vertical-align: middle;
-            width: 180px;
-            height: 18px;
-            border-width: 1px;
-            border-style: solid;
-            border-color: rgba(232, 232, 232, 1);
-            border-radius: 5px;
-            padding:10px;
-        }
-
     }
+
+    .title {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 13.3px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+    }
+
+    .tpfield {
+        width: 180px;
+        height: 18px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgba(232, 232, 232, 1);
+        border-radius: 5px;
+        padding:10px;
+    }
+
+    .tpfield-container {
+        align-items: center;
+      }
+    .tpfield-container label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    label {
+      margin-bottom: 15px;
+    }
+
+    .tpfield.valid {
+        border-color: green;
+      }
+    .tpfield.invalid {
+        border-color: red;
+      }
+
 
     .confirm {
         /* display: flex; */
@@ -292,6 +320,12 @@ a {
         line-height: 13.3px;
         letter-spacing: 0;
     }
+
+    .register:hover {
+        background-color: hsl(0, 0%, 70%);
+        cursor: pointer;
+      }
+    
 
     section {
         width: 1000px;

@@ -8,6 +8,36 @@
   <link rel="stylesheet" href="../external/booking.css">
   <link rel="stylesheet" href="../external/login.css">
 </head>
+<style>
+  .tpfield {
+        width: 180px;
+        height: 18px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgba(232, 232, 232, 1);
+        border-radius: 5px;
+        padding:10px;
+    }
+
+    .tpfield-container {
+        align-items: center;
+      }
+    .tpfield-container label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    label {
+      margin-bottom: 15px;
+    }
+
+    .tpfield.valid {
+  border-color: green !important;
+}
+    .tpfield.invalid {
+  border-color: red !important;
+}
+</style>
 
 <body>
   <nav>
@@ -81,17 +111,25 @@
   <hr class="hidden">
   <section id="payment" class="hidden">
     <h3>信用卡付款資訊</h3>
-    <div class="subtitle"><span class="title">卡片號碼：</span><input type="text" inputmode="numeric" maxlength="19"
+    <!-- <div class="subtitle"><span class="title">卡片號碼：</span><input type="text" inputmode="numeric" maxlength="19"
         placeholder="**** **** **** ****"></div>
     <div class="subtitle"><span class="title">過期時間：</span><input type="text" inputmode="numeric" maxlength="5"
         placeholder="MM/YY"></div>
     <div class="subtitle"><span class="title">驗證密碼：</span><input type="text" inputmode="numeric" maxlength="4"
-        placeholder="CVV"></div>
+        placeholder="CVV"></div> -->
+      <!-- <div class="subtitle"><span class="title">卡片號碼：</span><div class="tpfield" id="card-number"></div></div>
+      <div class="subtitle"><span class="title">過期時間：</span><div class="tpfield" id="card-expiration-date"></div></div>
+      <div class="subtitle"><span class="title">驗證密碼：</span><div class="tpfield" id="card-ccv"></div></div> -->
+      <div class="tpfield-container">
+        <label><span class="title">卡片號碼：</span><div class="tpfield" id="card-number"></div></label>
+        <label><span class="title">過期時間：</span><div class="tpfield" id="card-expiration-date"></div></label>
+        <label><span class="title">驗證密碼：</span><div class="tpfield" id="card-ccv"></div></label>
+      </div>
   </section>
   <hr class="hidden">
   <div class="confirm hidden">
     <h4>總價：新台幣<span id="finalPrice">2000</span>元</h4>
-    <button>確認訂購並付款</button>
+    <button id="paymentBtn" disabled>確認訂購並付款</button>
   </div>
   <footer>
     <p>COPYRIGHT © 2025 台北一日遊</p>
@@ -101,5 +139,7 @@
 <script src="../external/credential.js"></script>
 <script src="../external/bookingBtn.js"></script>
 <script src="../external/booking.js"></script>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.19.2"></script>
+<script src="../external/tappay.js"></script>
 
 </html>

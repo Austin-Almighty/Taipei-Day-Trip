@@ -72,8 +72,8 @@ async def thankyou(request: Request):
 	return FileResponse("./static/thankyou.html", media_type="text/html")
 
 @app.get('/api/attractions', response_model=AttractionsResponse)
-# async def find_attractions(request: Request, page: Annotated[int, Query()], keyword: Annotated[str | None, Query(max_length=20)] = None):
-async def find_attractions(request: Request, page: int = Query(), keyword: str = Query(default=None)) :
+async def find_attractions(request: Request, page: Annotated[int, Query()], keyword: Annotated[str | None, Query(max_length=20)] = None):
+# async def find_attractions(request: Request, page: int = Query(), keyword: str = Query(default=None)) :
 	if keyword:
 		limit = 13
 		offset = page*12
@@ -278,4 +278,9 @@ def delete_booking(request: Request, credentials: HTTPAuthorizationCredentials =
 		return JSONResponse({"ok": True})
 	except jwt.InvalidTokenError:
 		return JSONResponse({"error": True, "message": "未登入系統，拒絕存取"}, status_code=403)
+	
 
+# 建立新的訂單並完成付款
+@app.post("/api/orders")
+def tap_pay_order():
+	return
