@@ -66,25 +66,25 @@ document.addEventListener("DOMContentLoaded", () => {
       paymentBtn.setAttribute("disabled", true);
     }
 
-    updateFieldStatus("card-number", update.status.number);
-    updateFieldStatus("card-expiration-date", update.status.expiry);
-    updateFieldStatus("card-ccv", update.status.ccv);
-  });
+  //   updateFieldStatus("card-number", update.status.number);
+  //   updateFieldStatus("card-expiration-date", update.status.expiry);
+  //   updateFieldStatus("card-ccv", update.status.ccv);
+  // });
 
-  function updateFieldStatus(fieldId, status) {
-    const field = document.getElementById(fieldId);
-    field.classList.remove("valid", "invalid");
+  // function updateFieldStatus(fieldId, status) {
+  //   const field = document.getElementById(fieldId);
+  //   field.classList.remove("valid", "invalid");
 
-    if (status === 0) {
-      field.classList.remove("valid", "invalid");
-      field.classList.add("valid");
-    } else if (status === 2) {
-      field.classList.remove("valid", "invalid");
-      field.classList.add("invalid");
-    } else {
-      field.classList.remove("valid", "invalid");
-    }
-  }
+  //   if (status === 0) {
+  //     field.classList.remove("valid", "invalid");
+  //     field.classList.add("valid");
+  //   } else if (status === 2) {
+  //     field.classList.remove("valid", "invalid");
+  //     field.classList.add("invalid");
+  //   } else {
+  //     field.classList.remove("valid", "invalid");
+  //   }
+  // }
 });
 
 
@@ -146,11 +146,11 @@ async function primeToBackEnd(prime) {
     if (response.ok) {
         let data = await response.json();
         let orderNumber = data.data.number;
-        let message = data.data.payment.message;
+        // let message = data.data.payment.message;
         window.location.href = `/thankyou?number=${orderNumber}`
 
     } else {
-       alert()
+       console.log("Something went wrong: No response from API")
     }
 }
-
+})

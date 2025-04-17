@@ -10,9 +10,9 @@ payload = {
     "details": "TapPay Test",
     # "amount": 2000,
     "cardholder": {
-        "phone_number": "+886923456789",
-        "name": "王小明",
-        "email": "LittleMing@Wang.com"
+        # "phone_number": "+886923456789",
+        # "name": "王小明",
+        # "email": "LittleMing@Wang.com"
     },
     "remember": False
 }

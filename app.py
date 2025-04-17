@@ -41,7 +41,7 @@ class AttractionsResponse(BaseModel):
 	data: List[Attraction]
 
 class AttractionResponse(BaseModel):
-	data: List[Attraction]
+	data: Attraction
 
 class MrtResponse(BaseModel):
 	data: List[str]
@@ -187,7 +187,7 @@ def login(request: Request, login_payload: Annotated[dict, Body()]):
 	except argon2.exceptions.VerifyMismatchError:
 			return JSONResponse({"error": True, "message": "登入失敗，帳號或密碼錯誤"}, status_code=400)
 	except Exception as e:
-		return JSONResponse({"error": True, "message": "伺服器內部錯誤"}, status_code=500)
+		return JSONResponse({"error": True, "message": e}, status_code=500)
 	
 # 取得尚未確認的預定行程
 @app.get("/api/booking")
@@ -216,7 +216,7 @@ def retrieve_unfinished_booking(request: Request, credentials: HTTPAuthorization
 		urls = json.loads(attraction_info["images"])
 		first_image = urls[0]
 		attraction_info["images"] = first_image
-		return JSONResponse({"data":{"attraction":attraction_info, "date": date, "time": time, "price": price}})
+		return JSONResponse({"data":{"attraction":attraction_info, "date": date, "time": time, "price": price}}, status_code=200)
 	except jwt.InvalidTokenError:
 		return JSONResponse({"error": True, "message":"未登入系統，拒絕存取"}, status_code=403)
 
@@ -282,7 +282,7 @@ def delete_booking(request: Request, credentials: HTTPAuthorizationCredentials =
 
 from data.tappayKeys import headers, payload, tappay_URL
 from data.tappay import connect_to_tappay
-import datetime, random
+import random
 # 建立新的訂單並完成付款
 @app.post("/api/orders")
 async def tap_pay_order(request: Request, payment: Annotated[dict, Body()], credentials: HTTPAuthorizationCredentials = Depends(bearer)):
@@ -300,24 +300,26 @@ async def tap_pay_order(request: Request, payment: Annotated[dict, Body()], cred
 		contact_email = payment["contact"].get("email")
 		contact_phone = payment["contact"].get("phone")
 		status = False
-		referenceID = datetime.datetime.now().strftime("%Y%m%d%H") + random.randint(10000, 99999)
-		query = "insert into orders (name, email, phone, attractionID, date, time, price, userID, status, referenceID) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+		referenceID = datetime.now().strftime("%Y%m%d%H") + str(random.randint(10000, 99999))
+		query = "insert into orders (name, email, phone, attractionID, date, time, price, userID, status, referenceID) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
 		cursor = cnx.cursor(dictionary=True)
 		cursor.execute(query, (contact_name, contact_email, contact_phone, attractionID, date, time, price, userID, status, referenceID))
 		cnx.commit()
 		payload["prime"] = tappay_prime
 		payload["amount"] = price
-
+		payload["cardholder"]["phone_number"] = contact_phone
+		payload["cardholder"]["name"] = contact_name
+		payload["cardholder"]["email"] = contact_email
 		# 傳送prime到tappay
 		tappay_response = await connect_to_tappay(tappay_URL, headers, payload)
 		if not tappay_response:
 			return JSONResponse({"error": True, "message": "無法連線到付款服務"}, status_code=400)
+		delete_query = "delete from booking where userID = %s;"
+		cursor = cnx.cursor(dictionary=True)
+		cursor.execute(delete_query, (userID,))
+		cnx.commit()
+		cursor.close()
 		if tappay_response["status"] != 0:
-			delete_query = "delete from booking where userID = %s;"
-			cursor = cnx.cursor(dictionary=True)
-			cursor.execute(delete_query, (userID,))
-			cnx.commit()
-			cursor.close()
 			return JSONResponse({"data":{"number": referenceID, "payment":{"status":0, "message":"付款失敗"}}}, status_code=200)
 		else:
 			update_query = "update orders set status = %s where referenceID = %s;"
@@ -328,13 +330,56 @@ async def tap_pay_order(request: Request, payment: Annotated[dict, Body()], cred
 			return JSONResponse({"data":{"number": referenceID, "payment":{"status":1, "message":"付款成功"}}}, status_code=200)
 	except jwt.InvalidTokenError:
 		return JSONResponse({"error": True, "message": "未登入系統，拒絕存取"}, status_code=403)
-	except mysql.connector.Error:
-		return JSONResponse({"error": True, "message": "訂單建立失敗"}, status_code=400)
-	except Exception:
-		return JSONResponse({"error":True, "message":"伺服器內部錯誤"}, status_code=500)
+	except mysql.connector.Error as e:
+		return JSONResponse({"error": True, "message": e}, status_code=400)
+	except Exception as e:
+		return JSONResponse({"error":True, "message":e}, status_code=500)
 
 # 根據訂單編號取得訂單資訊
-# @app.get("/api/order/{orderNumber}")
-# def get_order_by_number(request: Request, orderNumber: int):
-# 	return
+@app.get("/api/order/{orderNumber}")
+def get_order_by_number(request: Request, orderNumber: str, credentials: HTTPAuthorizationCredentials = Depends(bearer)):
+	try:
+		token = credentials.credentials
+		decoded_token = jwt.decode(token, secret_key, algorithms=algorithm)
+		user_id = decoded_token.get("userID")
+		order_query = "select * from orders where referenceID = %s and userID = %s;"
+		cursor = cnx.cursor(dictionary=True)
+		cursor.execute(order_query, (orderNumber, user_id))
+		order_detail = cursor.fetchone()
+		if order_detail is None:
+			return JSONResponse(None, status_code=200)
+		date = order_detail.get("date").isoformat() #Needed to turn the date object into a string, or it will fail the JSONResponse
+		time = order_detail.get("time")
+		price = order_detail.get("price")
+		attractionID = order_detail.get("attractionID")
+		contact_name = order_detail.get("name")
+		contact_phone = order_detail.get("phone")
+		contact_email = order_detail.get("email")
+		status = order_detail.get("status")
+
+		attraction_info_query = "select id, name, address, images from attractions where id = %s;"
+		cursor = cnx.cursor(dictionary=True)
+		cursor.execute(attraction_info_query, (attractionID,))
+		attraction_info = cursor.fetchone()
+		cursor.close()
+		urls = json.loads(attraction_info["images"])
+		first_image = urls[0]
+		attraction_info["images"] = first_image
+		return JSONResponse({
+			"data":{
+				"number":orderNumber, 
+				"price": price, 
+				"trip":{
+					"attraction":attraction_info, 
+					"date":date, 
+					"time": time}
+					}, 
+				"contact":{
+					"name":contact_name, 
+					"email":contact_email, 
+					"phone":contact_phone},
+				"status": status
+					}, status_code=200)
+	except jwt.InvalidTokenError:
+		return JSONResponse({"error": True, "message": "未登入系統，拒絕存取"}, status_code=403)
 
