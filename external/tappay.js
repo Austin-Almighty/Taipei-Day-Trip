@@ -87,27 +87,70 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-const paymentBtn = document.getElementById('paymentBtn');
-paymentBtn.addEventListener("click", sendPrime);
 
-function sendPrime() {
+const contactName = document.getElementById("contact-name");
+const contactEmail = document.getElementById("contact-email");
+const contactPhone = document.getElementById("contact-phone");
+
+const paymentBtn = document.getElementById('paymentBtn');
+paymentBtn.addEventListener("click", ()=>{sendPrime(primeToBackEnd)});
+
+
+
+function sendPrime(callback) {
+    if (!contactName.value || !contactEmail.value || !contactPhone.value) {
+        alert("請輸入聯絡資訊")
+        return
+    }
     // 取得 TapPay Fields 的 status
     const tappayStatus = TPDirect.card.getTappayFieldsStatus()
     // 確認是否可以 getPrime
     if (tappayStatus.canGetPrime === false) {
         alert('連線失敗')
-        return
     }
     // Get prime
     TPDirect.card.getPrime((result) => {
         if (result.status !== 0) {
             alert('get prime error ' + result.msg)
-            return
+        } else {
+            callback(result.card.prime);
         }
-        alert('get prime 成功，prime: ' + result.card.prime)
-
-        // send prime to your server, to pay with Pay by Prime API .
-        // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
     })
 
 }
+
+async function primeToBackEnd(prime) {
+    let booking = JSON.parse(localStorage.getItem('booking'));
+    let token = localStorage.getItem("jwtToken");
+    let response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            prime: prime,
+            order: {
+                price: booking.data.price,
+                date: booking.data.date,
+                time: booking.data.time,
+                trip: booking.data.attraction
+            },
+            contact: {
+                name: contactName.value.trim(),
+                email: contactEmail.value.trim(),
+                phone: contactPhone.value.trim()
+            }
+        })
+    });
+    if (response.ok) {
+        let data = await response.json();
+        let orderNumber = data.data.number;
+        let message = data.data.payment.message;
+        window.location.href = `/thankyou?number=${orderNumber}`
+
+    } else {
+       alert()
+    }
+}
+

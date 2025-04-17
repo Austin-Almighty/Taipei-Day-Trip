@@ -167,10 +167,10 @@ def fetch_current_user(request: Request, credentials: HTTPAuthorizationCredentia
 	
 # 登入會員帳戶
 @app.put("/api/user/auth")
-def login(request: Request, payload: Annotated[dict, Body()]):
+def login(request: Request, login_payload: Annotated[dict, Body()]):
 	try:
-		email = payload.get("email")
-		password = payload.get("password")
+		email = login_payload.get("email")
+		password = login_payload.get("password")
 		query = "select * from users where email = %s;"
 		cursor = cnx.cursor(dictionary=True)
 		cursor.execute(query,(email,))
@@ -280,7 +280,61 @@ def delete_booking(request: Request, credentials: HTTPAuthorizationCredentials =
 		return JSONResponse({"error": True, "message": "未登入系統，拒絕存取"}, status_code=403)
 	
 
+from data.tappayKeys import headers, payload, tappay_URL
+from data.tappay import connect_to_tappay
+import datetime, random
 # 建立新的訂單並完成付款
 @app.post("/api/orders")
-def tap_pay_order():
-	return
+async def tap_pay_order(request: Request, payment: Annotated[dict, Body()], credentials: HTTPAuthorizationCredentials = Depends(bearer)):
+	try:
+		token = credentials.credentials
+		decoded_token = jwt.decode(token, secret_key, algorithms=algorithm)
+		userID = decoded_token.get("userID")
+		tappay_prime = payment.get("prime")
+		order = payment["order"]
+		price = payment["order"]["price"]
+		date = order["date"]
+		time = order["time"]
+		attractionID = payment["order"]['trip']['id']
+		contact_name = payment["contact"].get("name")
+		contact_email = payment["contact"].get("email")
+		contact_phone = payment["contact"].get("phone")
+		status = False
+		referenceID = datetime.datetime.now().strftime("%Y%m%d%H") + random.randint(10000, 99999)
+		query = "insert into orders (name, email, phone, attractionID, date, time, price, userID, status, referenceID) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+		cursor = cnx.cursor(dictionary=True)
+		cursor.execute(query, (contact_name, contact_email, contact_phone, attractionID, date, time, price, userID, status, referenceID))
+		cnx.commit()
+		payload["prime"] = tappay_prime
+		payload["amount"] = price
+
+		# 傳送prime到tappay
+		tappay_response = await connect_to_tappay(tappay_URL, headers, payload)
+		if not tappay_response:
+			return JSONResponse({"error": True, "message": "無法連線到付款服務"}, status_code=400)
+		if tappay_response["status"] != 0:
+			delete_query = "delete from booking where userID = %s;"
+			cursor = cnx.cursor(dictionary=True)
+			cursor.execute(delete_query, (userID,))
+			cnx.commit()
+			cursor.close()
+			return JSONResponse({"data":{"number": referenceID, "payment":{"status":0, "message":"付款失敗"}}}, status_code=200)
+		else:
+			update_query = "update orders set status = %s where referenceID = %s;"
+			cursor = cnx.cursor(dictionary=True)
+			cursor.execute(update_query, (True, referenceID))
+			cnx.commit()
+			cursor.close()
+			return JSONResponse({"data":{"number": referenceID, "payment":{"status":1, "message":"付款成功"}}}, status_code=200)
+	except jwt.InvalidTokenError:
+		return JSONResponse({"error": True, "message": "未登入系統，拒絕存取"}, status_code=403)
+	except mysql.connector.Error:
+		return JSONResponse({"error": True, "message": "訂單建立失敗"}, status_code=400)
+	except Exception:
+		return JSONResponse({"error":True, "message":"伺服器內部錯誤"}, status_code=500)
+
+# 根據訂單編號取得訂單資訊
+# @app.get("/api/order/{orderNumber}")
+# def get_order_by_number(request: Request, orderNumber: int):
+# 	return
+

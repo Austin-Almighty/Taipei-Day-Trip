@@ -32,6 +32,7 @@ async function getBooking(token) {
         let data = await response.json();
         if (data) {
             renderBooking(data);
+            localStorage.setItem("booking", JSON.stringify(data));
         } else {
             const footer = document.querySelector("footer");
             footer.classList.toggle("highfooter");

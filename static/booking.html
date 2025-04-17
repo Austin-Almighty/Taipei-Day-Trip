@@ -84,7 +84,7 @@
   </dialog>
 
   <section id="booking">
-    <h3>您好，<span id="userName">Austin</span>，待預訂的行程如下：</h3>
+    <h3>您好，<span id="userName"></span>，待預訂的行程如下：</h3>
     <div class="infographic hidden">
       <img src="" id="mainImage">
       <div class="attractionInfo">
@@ -101,11 +101,11 @@
   <section id="contact" class="hidden">
     <h3>您的聯絡資訊</h3>
     <div class="subtitle"><span class="title">聯絡姓名：</span><input type="text" name="contact-name" placeholder="輸入您的姓名"
-        autocomplete="name"></div>
+        autocomplete="name" id="contact-name"></div>
     <div class="subtitle"><span class="title">聯絡信箱：</span><input type="email" name="contact-email"
-        placeholder="輸入您的電子郵件" autocomplete="email"></div>
+        placeholder="輸入您的電子郵件" autocomplete="email" id="contact-email"></div>
     <div class="subtitle"><span class="title">手機號碼：</span><input type="tel" name="contact-phone" placeholder="輸入您的手機號碼"
-        inputmode="tel" autocomplete="tel"></div>
+        inputmode="tel" autocomplete="tel" id="contact-phone"></div>
     <h4>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</h4>
   </section>
   <hr class="hidden">
@@ -139,7 +139,7 @@
 <script src="../external/credential.js"></script>
 <script src="../external/bookingBtn.js"></script>
 <script src="../external/booking.js"></script>
-<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.19.2"></script>
-<script src="../external/tappay.js"></script>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.19.2" defer></script>
+<script src="../external/tappay.js" defer></script>
 
 </html>
