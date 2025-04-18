@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Query, Body, Depends
+from fastapi import FastAPI, Request, Query, Body, Depends, Path
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -337,7 +337,7 @@ async def tap_pay_order(request: Request, payment: Annotated[dict, Body()], cred
 
 # 根據訂單編號取得訂單資訊
 @app.get("/api/order/{orderNumber}")
-def get_order_by_number(request: Request, orderNumber: str, credentials: HTTPAuthorizationCredentials = Depends(bearer)):
+def get_order_by_number(request: Request, orderNumber: Annotated[str, Path(title="reference ID created during checkout")], credentials: HTTPAuthorizationCredentials = Depends(bearer)):
 	try:
 		token = credentials.credentials
 		decoded_token = jwt.decode(token, secret_key, algorithms=algorithm)
