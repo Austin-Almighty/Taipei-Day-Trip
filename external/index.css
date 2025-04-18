@@ -1,9 +1,9 @@
 body {
-    padding: 0;
-    margin: 0;
-    font-family: "Noto Sans TC", sans-serif;
-    width: 100%;
-    color: #666666;
+  padding: 0;
+  margin: 0;
+  font-family: "Noto Sans TC", sans-serif;
+  width: 100%;
+  color: #666666;
 }
 
 a {
@@ -11,784 +11,809 @@ a {
   color: inherit;
 }
 
-@media (min-width: 1201px) and (max-width: 1920px){
-    nav {
-        display: flex;
-        align-items: center;
-        height: 54px;
-        padding: 10px 0;
-        justify-content: center;
-        position: sticky;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 100;
-        background-color: #FFFFFF;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+@media (min-width: 1201px) and (max-width: 1920px) {
+  nav {
+    display: flex;
+    align-items: center;
+    height: 54px;
+    padding: 10px 0;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-    #navbar {
-        display: flex;
-        justify-content: space-between;
-        width: 1200px;
-        align-items: center;
-    }
+  #navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 1200px;
+    align-items: center;
+  }
 
-    #navbar h2 {
-        color: #448899;
-        size: 30px;
-        line-height: 34px;
-        letter-spacing: 0;
-        font-weight: 700;
-    }
+  #navbar h2 {
+    color: #448899;
+    size: 30px;
+    line-height: 34px;
+    letter-spacing: 0;
+    font-weight: 700;
+  }
 
-    nav #login {
-        display: flex;
-        align-items: center;
-    }
+  nav #login {
+    display: flex;
+    align-items: center;
+  }
 
-    .register {
-        font-weight: 500;
-        padding: 10px;
-        font-size: 16px;
-        line-height: 13.3px;
-        letter-spacing: 0;
-    }
+  .register {
+    font-weight: 500;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 13.3px;
+    letter-spacing: 0;
+  }
 
-    
-   
 
-    .hero-section {
-        background-image: url('/external/welcome.png');
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        justify-content: center;  
-        align-items: center;   
-        height: 320px;
-        width: 100%;
-      }
-      
-      .searchSection {
-        width: 1200px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;  
-        text-align: left;         
-        gap: 20px;  
-        margin-left: 15px;  
-      }
-      
-      #mobile {
-        color:#F8F8F8;
-        font-weight: 700;
-        font-size: 28px;
-        line-height: 24px;
-        letter-spacing: 0;
-      }
-      #search {
-        color: #F8F8F8;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 20px;
-      }
-      
-      .searchDiv {
-        display: flex;
-        align-items: center;
-      }
-      
-      #searchBox {
-        width: 400px;
-        height: 46px;
-        border-radius: 5px;
-        font-weight: 700;
-        color: #757575;
-        padding-left: 15px;
-        outline: none;
-        border: none;
-      }
-      
-      #searchIcon {
-        height: 48px;
-        width: 60px;
-        background-color: #448899;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        left: -59px;
-      }
-      
+  .register:hover {
+    background-color: hsl(0, 0%, 30%);
+    cursor: pointer;
+  }
 
-      #searchIcon:hover {
-        background-color: hsl(192, 38%, 50%);
-      }
+  #login-book:hover #login-register:hover {
+    background-color: hsl(0, 0%, 30%);
+    cursor: pointer;
+    ;
+  }
 
-      #searchIcon:active {
-        background-color: hsl(192, 38%, 30%);
-      }
 
-      #searchIcon img {
-        width: 30px;
-        height: 30px;
-      }
+  .hero-section {
+    background-image: url('/external/welcome.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    width: 100%;
+  }
 
-    main {
-        padding: 40px 0;
-        justify-items: center;
-    }
+  .searchSection {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+    margin-left: 15px;
+  }
 
-    #scroll {
-        display: flex;
-        width: 1200px;
-    }
+  #mobile {
+    color: #F8F8F8;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
 
-    #scroll img {
-        width: 30px;
-        height: 30px;
-        opacity: 50%;
-        border: 1px solid black;
-        border-radius: 16px;
-    }
+  #search {
+    color: #F8F8F8;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+  }
 
-    #scroll img:hover {
-        background-color: hsl(0, 0%, 30%);
-    }
-    
-    #scroll img:active {
-        background-color: hsl(0, 0%, 70%);
-    }
+  .searchDiv {
+    display: flex;
+    align-items: center;
+  }
 
-    .list-bar {
-        display: flex;
-        height: 70px;
-        width: 1200px;
-        justify-content: space-evenly;
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-    }
+  #searchBox {
+    width: 400px;
+    height: 46px;
+    border-radius: 5px;
+    font-weight: 700;
+    color: #757575;
+    padding-left: 15px;
+    outline: none;
+    border: none;
+  }
 
-    .list-bar .stations {
-        scroll-snap-align: start;
-        flex-shrink: 0;
-        height: 24px;
-        padding: 5px 15px 5px 15px;
-        text-align: center;
-        font-weight: 500;
-        font-size: 16px;
-        justify-content: center;
-    }
+  #searchIcon {
+    height: 48px;
+    width: 60px;
+    background-color: #448899;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: -59px;
+  }
 
-    .list-bar .stations:hover {
-        background-color: hsl(0, 0%, 60%);
-    }
 
-    .list-bar .stations:active {
-        background-color: hsl(0, 0%, 80%);
-    }
+  #searchIcon:hover {
+    background-color: hsl(192, 38%, 50%);
+  }
 
-    .display {
-        width: 1200px;
-        margin-bottom: 40px;
+  #searchIcon:active {
+    background-color: hsl(192, 38%, 30%);
+  }
 
-    }
+  #searchIcon img {
+    width: 30px;
+    height: 30px;
+  }
 
-    .grid {
-        display: grid;
-        padding: 15px;
-        grid-template-rows: repeat(auto-fit, 242px);
-        grid-template-columns: repeat(auto-fit, 270px);
-        gap: 30px;
-    }
+  main {
+    padding: 40px 0;
+    justify-items: center;
+  }
 
-    .locationCard {
-        height: 242px;
-        border-width: 1px;
-        border-color: rgba(0, 0, 0, 0.248);
-        border-style: solid;
-    }
+  #scroll {
+    display: flex;
+    width: 1200px;
+  }
 
-    .locationCard img {
-        width: 268px;
-        height: 197px;
-    }
+  #scroll img {
+    width: 30px;
+    height: 30px;
+    opacity: 50%;
+    border: 1px solid black;
+    border-radius: 16px;
+  }
 
-    .attractionName {
-        position: relative;
-        background-color: rgba(0, 0, 0, 0.393);
-        width: 259px;
-        height: 40px;
-        color: white;
-        font-weight: 700;
-        font-size: 16px;
-        top: -45px;
-        padding-left: 10px;
-        align-content: center;
-        /* text-align:calc(30px); */
-    }
+  #scroll img:hover {
+    background-color: hsl(0, 0%, 30%);
+  }
 
-    .attractionInfo {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 10px;
-        position: relative;
-        top: px;
-        width: 249px;
-        height: 45px;
-        position: relative;
-        top: -45px;
-        align-items: center;
-    }
+  #scroll img:active {
+    background-color: hsl(0, 0%, 70%);
+  }
 
-    footer {
-        background-color: #757575;
-        height: 104px;
-        text-align: center;
-        align-content: center;
-    }
+  .list-bar {
+    display: flex;
+    height: 70px;
+    width: 1200px;
+    justify-content: space-evenly;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
 
-    footer p {
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 13.3px;
-        vertical-align:middle;
-        color: #FFFFFF;
-    }
+  .list-bar .stations {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    height: 24px;
+    padding: 5px 15px 5px 15px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    justify-content: center;
+  }
+
+  .list-bar .stations:hover {
+    background-color: hsl(0, 0%, 60%);
+  }
+
+  .list-bar .stations:active {
+    background-color: hsl(0, 0%, 80%);
+  }
+
+  .display {
+    width: 1200px;
+    margin-bottom: 40px;
+
+  }
+
+  .grid {
+    display: grid;
+    padding: 15px;
+    grid-template-rows: repeat(auto-fit, 242px);
+    grid-template-columns: repeat(auto-fit, 270px);
+    gap: 30px;
+  }
+
+  .locationCard {
+    height: 242px;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.248);
+    border-style: solid;
+  }
+
+  .locationCard img {
+    width: 268px;
+    height: 197px;
+  }
+
+  .attractionName {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.393);
+    width: 259px;
+    height: 40px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    top: -45px;
+    padding-left: 10px;
+    align-content: center;
+    /* text-align:calc(30px); */
+  }
+
+  .attractionInfo {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+    position: relative;
+    top: px;
+    width: 249px;
+    height: 45px;
+    position: relative;
+    top: -45px;
+    align-items: center;
+  }
+
+  footer {
+    background-color: #757575;
+    height: 104px;
+    text-align: center;
+    align-content: center;
+  }
+
+  footer p {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    vertical-align: middle;
+    color: #FFFFFF;
+  }
 
 }
 
 
 body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+
+@media (min-width: 361px) and (max-width: 1200px) {
+
+
+  nav {
+    display: flex;
+    align-items: center;
+    height: 54px;
+    padding: 10px 0;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  #navbar {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+  }
+
+  #navbar h2 {
+    color: #448899;
+    font-size: 30px;
+    line-height: 34px;
+    letter-spacing: 0;
+    font-weight: 700;
+    padding-left: 10px;
+  }
+
+  nav #login {
+    display: flex;
+    align-items: center;
+  }
+
+  .register {
+    font-weight: 500;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 13.3px;
+    letter-spacing: 0;
+  }
+
+  .register:hover {
+    background-color: hsl(0, 0%, 30%);
+    cursor: pointer;
+  }
+
+
+
+  .hero-section {
+    background-image: url('/external/welcome.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    width: 100%;
+  }
+
+  .searchSection {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+    margin-left: 15px;
+  }
+
+  #mobile {
+    color: #F8F8F8;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+
+  #search {
+    color: #f8f8f8;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .searchDiv {
+    display: flex;
+    align-items: center;
+    width: 50%;
+  }
+
+
+  #searchForm {
+    flex-grow: 1;
+  }
+
+  #searchBox {
+    width: 100%;
+    height: 46px;
+    border-radius: 5px;
+    font-weight: 700;
+    color: #757575;
+    padding-left: 15px;
+    outline: none;
+    border: none;
+  }
+
+  #searchIcon {
+    height: 48px;
+    width: 60px;
+    background-color: #448899;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+  }
+
+  #searchIcon:hover {
+    background-color: hsl(192, 38%, 50%);
+  }
+
+  #searchIcon:active {
+    background-color: hsl(192, 38%, 30%);
+  }
+
+  #searchIcon img {
+    width: 30px;
+    height: 30px;
+  }
+
+
+  #scroll {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+  }
+
+  #scroll img {
+    width: 30px;
+    height: 30px;
+    opacity: 50%;
+    border: 1px solid black;
+    border-radius: 16px;
+    cursor: pointer;
+  }
+
+  #scroll img:hover {
+    background-color: hsl(0, 0%, 30%);
+  }
+
+  #scroll img:active {
+    background-color: hsl(0, 0%, 70%);
+  }
+
+  .list-bar {
+    display: flex;
+    height: 70px;
+    max-width: 1100px;
+    width: 100%;
+    justify-content: space-evenly;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    align-items: center;
+  }
+
+  .list-bar .stations {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    height: 24px;
+    padding: 5px 15px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .list-bar .stations:hover {
+    background-color: hsl(0, 0%, 60%);
+  }
+
+  .list-bar .stations:active {
+    background-color: hsl(0, 0%, 80%);
+  }
+
+  .display {
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px auto;
+  }
+
+  .grid {
+    display: grid;
+    gap: 30px;
+    padding: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 235px;
+  }
+
+  .locationCard {
+    height: 242px;
+    border: 1px solid rgba(0, 0, 0, 0.248);
+    overflow: hidden;
+  }
+
+  .locationCard img {
+    width: 100%;
+    height: 197px;
+    object-fit: cover;
+  }
+
+  .attractionName {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.393);
+    width: calc(100% - 10px);
+    height: 40px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    top: -45px;
+    padding-left: 10px;
+  }
+
+  .attractionInfo {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+    position: relative;
+    top: -45px;
+    align-items: center;
+    height: 45px;
+  }
+
+  footer {
+    background-color: #757575;
+    height: 104px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    color: #FFFFFF;
     margin: 0;
-    padding: 0;
-    font-family: "Noto Sans TC", sans-serif;
   }
-  
+}
 
-  @media (min-width: 361px) and (max-width: 1200px) {
-  
-
-    nav {
-      display: flex;
-      align-items: center;
-      height: 54px;
-      padding: 10px 0;
-      justify-content: center;
-      position: sticky;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    #navbar {
-      display: flex;
-      justify-content: space-between;
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
-      text-align: center;
-      align-items: center;
-    }
-    
-    #navbar h2 {
-      color: #448899;
-      font-size: 30px;
-      line-height: 34px;
-      letter-spacing: 0;
-      font-weight: 700;
-      padding-left: 10px;
-    }
-    
-    nav #login {
-      display: flex;
-      align-items: center;
-    }
-    
-    .register {
-      font-weight: 500;
-      padding: 10px;
-      font-size: 16px;
-      line-height: 13.3px;
-      letter-spacing: 0;
-    }
-    
-
-    .hero-section {
-      background-image: url('/external/welcome.png');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      justify-content: center;  
-      align-items: center;   
-      height: 320px;
-      width: 100%;
-    }
-    
-    .searchSection {
-      max-width: 1200px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start; 
-      text-align: left;        
-      gap: 20px;
-      margin-left: 15px;
-    }
-    #mobile {
-      color:#F8F8F8;
-      font-weight: 700;
-      font-size: 28px;
-      line-height: 24px;
-      letter-spacing: 0;
-      }
-    #search {
-      color: #f8f8f8;
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 20px;
-    }
-    
-    .searchDiv {
-      display: flex;
-      align-items: center;
-      width: 50%;
-    }
-    
-
-    #searchForm {
-      flex-grow: 1;
-    }
-    
-    #searchBox {
-      width: 100%;
-      height: 46px;
-      border-radius: 5px;
-      font-weight: 700;
-      color: #757575;
-      padding-left: 15px;
-      outline: none;
-      border: none;
-    }
-    
-    #searchIcon {
-      height: 48px;
-      width: 60px;
-      background-color: #448899;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      cursor: pointer;
-    }
-    
-    #searchIcon:hover {
-      background-color: hsl(192, 38%, 50%);
-    }
-    
-    #searchIcon:active {
-      background-color: hsl(192, 38%, 30%);
-    }
-    
-    #searchIcon img {
-      width: 30px;
-      height: 30px;
-    }
-    
-
-    #scroll {
-      display: flex;
-      align-items: center;
-      margin: 0 20px;
-    }
-    
-    #scroll img {
-      width: 30px;
-      height: 30px;
-      opacity: 50%;
-      border: 1px solid black;
-      border-radius: 16px;
-      cursor: pointer;
-    }
-    
-    #scroll img:hover {
-      background-color: hsl(0, 0%, 30%);
-    }
-    
-    #scroll img:active {
-      background-color: hsl(0, 0%, 70%);
-    }
-    
-    .list-bar {
-      display: flex;
-      height: 70px;
-      max-width: 1100px;
-      width: 100%;
-      justify-content: space-evenly;
-      overflow-x: scroll;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      align-items: center;
-    }
-    
-    .list-bar .stations {
-      scroll-snap-align: start;
-      flex-shrink: 0;
-      height: 24px;
-      padding: 5px 15px;
-      text-align: center;
-      font-weight: 500;
-      font-size: 16px;
-      justify-content: center;
-      cursor: pointer;
-    }
-    
-    .list-bar .stations:hover {
-      background-color: hsl(0, 0%, 60%);
-    }
-    
-    .list-bar .stations:active {
-      background-color: hsl(0, 0%, 80%);
-    }
-    
-    .display {
-      max-width: 1200px;
-      width: 100%;
-      margin: 20px auto;
-    }
-    
-    .grid {
-      display: grid;
-      gap: 30px;
-      padding: 15px;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      grid-auto-rows: 235px;
-    }
-    
-    .locationCard {
-      height: 242px;
-      border: 1px solid rgba(0, 0, 0, 0.248);
-      overflow: hidden;
-    }
-    
-    .locationCard img {
-      width: 100%;
-      height: 197px;
-      object-fit: cover;
-    }
-    
-    .attractionName {
-      position: relative;
-      background-color: rgba(0, 0, 0, 0.393);
-      width: calc(100% - 10px);
-      height: 40px;
-      color: white;
-      font-weight: 700;
-      font-size: 16px;
-      top: -45px;
-      padding-left: 10px;
-    }
-    
-    .attractionInfo {
-      display: flex;
-      justify-content: space-between;
-      margin: 0 10px;
-      position: relative;
-      top: -45px;
-      align-items: center;
-      height: 45px;
-    }
-    
-    footer {
-      background-color: #757575;
-      height: 104px;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    footer p {
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 13.3px;
-      color: #FFFFFF;
-      margin: 0;
-    }
+@media (max-width: 360px) {
+  nav {
+    display: flex;
+    align-items: center;
+    height: 54px;
+    padding: 10px 0;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  @media (max-width: 360px) {
-    nav {
-        display: flex;
-        align-items: center;
-        height: 54px;
-        padding: 10px 0;
-        justify-content: center;
-        position: sticky;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 100;
-        background-color: #ffffff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      
-      #navbar {
-        display: flex;
-        justify-content: space-between;
-        max-width: 1200px;
-        width: 100%;
-        margin: 0 auto;
-        text-align: center;
-        align-items: center;
-      }
-      
-      #navbar h2 {
-        color: #448899;
-        font-size: 30px;
-        line-height: 34px;
-        letter-spacing: 0;
-        font-weight: 700;
-        padding: 0 10px;
-      }
-      
-      nav #login {
-        display: flex;
-        align-items: center;
-        height: 34px;
-        padding-right: 10px;
-    
-      }
-      
-      .register {
-        font-weight: 500;
-        padding: 10px;
-        font-size: 16px;
-        line-height: 13.3px;
-        letter-spacing: 0;
-      }
-      
-  
-      .hero-section {
-        background-image: url('/external/welcome.png');
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        justify-content: center;  
-        align-items: center;   
-        height: 320px;
-        width: 100%;
-      }
-      
-      .searchSection {
-        max-width: 1200px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start; 
-        text-align: left;        
-        gap: 20px;
-        margin-left: 15px;
-      }
+  #navbar {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+  }
 
-      #mobile {
-        color:#F8F8F8;
-        font-weight: 700;
-        font-size: 28px;
-        line-height: 24px;
-        letter-spacing: 0;
-      }
-      
-      #search {
-        color: #f8f8f8;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 13.3px;
-        letter-spacing: 0%;
-      }
-      
-      .searchDiv {
-        display: flex;
-        align-items: center;
-        width: 320px;
-      }
-      
-  
-      #searchForm {
-        flex-grow: 1;
-      }
-      
-      #searchBox {
-        width: 260px;
-        height: 46px;
-        border-radius: 5px;
-        font-weight: 700;
-        color: #757575;
-        padding-left: 15px;
-        outline: none;
-        border: none;
-      }
-      
-      #searchIcon {
-        height: 46px;
-        width: 60px;
-        background-color: #448899;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-      }
-      
-      #searchIcon:hover {
-        background-color: hsl(192, 38%, 50%);
-      }
-      
-      #searchIcon:active {
-        background-color: hsl(192, 38%, 30%);
-      }
-      
-      #searchIcon img {
-        width: 30px;
-        height: 30px;
-      }
-      
-      main {
-        justify-content: center;
-      }
+  #navbar h2 {
+    color: #448899;
+    font-size: 30px;
+    line-height: 34px;
+    letter-spacing: 0;
+    font-weight: 700;
+    padding: 0 10px;
+  }
 
-      #scroll {
-        display: flex;
-        align-items: center;
-        margin-top: 30px;
-        height: 70px;
-        width: 100%;
-        padding: 0 5px;
-      }
-      
-      #scroll img {
-        width: 32px;
-        height: 32px;
-        opacity: 50%;
-        border: 1px solid black;
-        border-radius: 16px;
-        cursor: pointer;
-      }
-      
-      #scroll img:hover {
-        background-color: hsl(0, 0%, 30%);
-      }
-      
-      #scroll img:active {
-        background-color: hsl(0, 0%, 70%);
-      }
-      
-      .list-bar {
-        display: flex;
-        height: 70px;
-        max-width: 1100px;
-        width: 100%;
-        justify-content: space-evenly;
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-        align-items: center;
-      }
-      
-      .list-bar .stations {
-        scroll-snap-align: start;
-        flex-shrink: 0;
-        height: 24px;
-        padding: 5px 15px;
-        text-align: center;
-        font-weight: 500;
-        font-size: 16px;
-        justify-content: center;
-        cursor: pointer;
-      }
-      
-      .list-bar .stations:hover {
-        background-color: hsl(0, 0%, 60%);
-      }
-      
-      .list-bar .stations:active {
-        background-color: hsl(0, 0%, 80%);
-      }
-      
-      .display {
-        max-width: 1200px;
-        width: 100%;
-        margin: 20px auto;
-      }
-      
-      .grid {
-        display: grid;
-        gap: 30px;
-        padding: 0 15px;
-        grid-template-columns: repeat(auto-fit, minmax(270px, 330px));
-        grid-auto-rows: auto;
-      }
-      
-      .locationCard {
-        height: 280px;
-        border: 1px solid rgba(0, 0, 0, 0.248);
-        border-radius: 5px;
-        overflow: hidden;
-      }
-      
-      .locationCard img {
-        width: 100%;
-        height: 235px;
-        object-fit: cover;
-      }
-      
-      .attractionName {
-        position: relative;
-        background-color: rgba(0, 0, 0, 0.393);
-        width: calc(100% - 10px);
-        height: 40px;
-        color: white;
-        font-weight: 700;
-        font-size: 16px;
-        top: -45px;
-        padding-left: 10px;
-        align-content: center;
-      }
-      
-      .attractionInfo {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 10px;
-        position: relative;
-        top: -30px;
-        align-content: center;
-        height: auto;
-      }
-      
-      footer {
-        background-color: #757575;
-        height: 104px;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      
-      footer p {
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 13.3px;
-        color: #FFFFFF;
-        margin: 0;
-      }
+  nav #login {
+    display: flex;
+    align-items: center;
+    height: 34px;
+    padding-right: 10px;
 
   }
+
+  .register {
+    font-weight: 500;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 13.3px;
+    letter-spacing: 0;
+  }
+
+  .register:hover {
+    background-color: hsl(0, 0%, 70%);
+    cursor: pointer;
+  }
+
+
+
+  .hero-section {
+    background-image: url('/external/welcome.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    width: 100%;
+  }
+
+  .searchSection {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+    margin-left: 15px;
+  }
+
+  #mobile {
+    color: #F8F8F8;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+
+  #search {
+    color: #f8f8f8;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13.3px;
+    letter-spacing: 0%;
+  }
+
+  .searchDiv {
+    display: flex;
+    align-items: center;
+    width: 320px;
+  }
+
+
+  #searchForm {
+    flex-grow: 1;
+  }
+
+  #searchBox {
+    width: 260px;
+    height: 46px;
+    border-radius: 5px;
+    font-weight: 700;
+    color: #757575;
+    padding-left: 15px;
+    outline: none;
+    border: none;
+  }
+
+  #searchIcon {
+    height: 46px;
+    width: 60px;
+    background-color: #448899;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  #searchIcon:hover {
+    background-color: hsl(192, 38%, 50%);
+  }
+
+  #searchIcon:active {
+    background-color: hsl(192, 38%, 30%);
+  }
+
+  #searchIcon img {
+    width: 30px;
+    height: 30px;
+  }
+
+  main {
+    justify-content: center;
+  }
+
+  #scroll {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    height: 70px;
+    width: 100%;
+    padding: 0 5px;
+  }
+
+  #scroll img {
+    width: 32px;
+    height: 32px;
+    opacity: 50%;
+    border: 1px solid black;
+    border-radius: 16px;
+    cursor: pointer;
+  }
+
+  #scroll img:hover {
+    background-color: hsl(0, 0%, 30%);
+  }
+
+  #scroll img:active {
+    background-color: hsl(0, 0%, 70%);
+  }
+
+  .list-bar {
+    display: flex;
+    height: 70px;
+    max-width: 1100px;
+    width: 100%;
+    justify-content: space-evenly;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    align-items: center;
+  }
+
+  .list-bar .stations {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    height: 24px;
+    padding: 5px 15px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .list-bar .stations:hover {
+    background-color: hsl(0, 0%, 60%);
+  }
+
+  .list-bar .stations:active {
+    background-color: hsl(0, 0%, 80%);
+  }
+
+  .display {
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px auto;
+  }
+
+  .grid {
+    display: grid;
+    gap: 30px;
+    padding: 0 15px;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 330px));
+    grid-auto-rows: auto;
+  }
+
+  .locationCard {
+    height: 280px;
+    border: 1px solid rgba(0, 0, 0, 0.248);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .locationCard img {
+    width: 100%;
+    height: 235px;
+    object-fit: cover;
+  }
+
+  .attractionName {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.393);
+    width: calc(100% - 10px);
+    height: 40px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    top: -45px;
+    padding-left: 10px;
+    align-content: center;
+  }
+
+  .attractionInfo {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+    position: relative;
+    top: -30px;
+    align-content: center;
+    height: auto;
+  }
+
+  footer {
+    background-color: #757575;
+    height: 104px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    color: #FFFFFF;
+    margin: 0;
+  }
+
+}
