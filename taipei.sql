@@ -67,7 +67,7 @@ CREATE TABLE `booking` (
   KEY `attractionID` (`attractionID`),
   CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`attractionID`) REFERENCES `attractions` (`id`),
   CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,6 +78,41 @@ LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
 INSERT INTO `booking` VALUES (6,4,'2025-04-30','afternoon',2500,15);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `orderID` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `attractionID` int DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `time` varchar(9) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `userID` int DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `referenceID` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`orderID`),
+  KEY `attractionID` (`attractionID`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`attractionID`) REFERENCES `attractions` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,'Austin','test3@gmail.com','1234567890',3,'2025-04-30','afternoon',2500,14,1,'202504162347066'),(2,'Austin  Liao','test3@gmail.com','1234567890',3,'2025-04-30','afternoon',2500,14,1,'202504162369350'),(3,'Pikachu','pica@gmail.com','21309128302183',22,'2025-04-24','morning',2000,14,1,'202504162338961'),(4,'Lai','Lailai@gmail.com','1234567890',2,'2025-04-26','afternoon',2500,14,1,'202504170044374'),(5,'Austin','test3@gmail.com','1234567890',2,'2025-04-28','morning',2000,14,1,'202504170090427'),(6,'Austin  Liao','test3@gmail.com','21309128302183',10,'2025-04-29','afternoon',2500,14,0,'202504170044990'),(7,'Austin','test3@gmail.com','1234567890',2,'2025-04-29','afternoon',2500,14,1,'202504171246916'),(8,'Austin','test3@gmail.com','1234567890',7,'2025-04-29','afternoon',2500,14,1,'202504171485622'),(9,'Austin  Liao','test3@gmail.com','1234567890',27,'2025-04-28','afternoon',2500,14,0,'202504171478822');
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -116,4 +151,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-10 17:11:57
+-- Dump completed on 2025-04-17 14:51:17

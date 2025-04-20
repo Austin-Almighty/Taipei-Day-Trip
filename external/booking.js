@@ -32,17 +32,20 @@ async function getBooking(token) {
         let data = await response.json();
         if (data) {
             renderBooking(data);
+            localStorage.setItem("booking", JSON.stringify(data));
         } else {
-            const footer = document.querySelector("footer");
-            footer.classList.toggle("highfooter");
-
             const userName = document.getElementById('userName');
             userName.innerText = localStorage.getItem('userName');
 
+            const footer = document.querySelector("footer");
+            footer.classList.toggle("highfooter");
+
             const booking = document.getElementById("booking");
+            
             const noBooking = document.createElement('p');
             noBooking.innerText = "目前沒有任何待預訂的行程";
             booking.appendChild(noBooking);
+            booking.classList.remove('hidden');
         }
     }
 }
