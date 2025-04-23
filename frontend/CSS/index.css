@@ -69,7 +69,7 @@ a {
 
 
   .hero-section {
-    background-image: url('/external/welcome.png');
+    background-image: url('../assets/welcome.png');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -338,7 +338,7 @@ body {
 
 
   .hero-section {
-    background-image: url('/external/welcome.png');
+    background-image: url('../assets/welcome.png');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -603,7 +603,7 @@ body {
 
 
   .hero-section {
-    background-image: url('/external/welcome.png');
+    background-image: url('../assets/welcome.png');
     background-size: cover;
     background-position: center;
     display: flex;

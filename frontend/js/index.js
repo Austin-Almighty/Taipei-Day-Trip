@@ -50,7 +50,7 @@ async function fetchStations() {
     if (response.ok) {
         let data = await response.json();
         for (station of data.data) {
-            renderStation(station);
+            renderStation(station["mrt"]);
         }
     } else {
         console.log('Unable to fetch station names');
