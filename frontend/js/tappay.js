@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // style focus state
       ":focus": {
         color: "black",
+
       },
       // style valid state
       ".valid": {
@@ -132,19 +133,22 @@ async function primeToBackEnd(prime) {
             prime: prime,
             order: {
                 price: booking.data.price,
-                date: booking.data.date,
-                time: booking.data.time,
-                trip: booking.data.attraction
+                trip: {
+                  attraction: booking.data.attraction,
+                  date: booking.data.date,
+                  time: booking.data.time,
+                },
+                contact: {
+                  name: contactName.value.trim(),
+                  email: contactEmail.value.trim(),
+                  phone: contactPhone.value.trim()
+              }
             },
-            contact: {
-                name: contactName.value.trim(),
-                email: contactEmail.value.trim(),
-                phone: contactPhone.value.trim()
-            }
         })
     });
     if (response.ok) {
         let data = await response.json();
+        console.log(data);
         let orderNumber = data.data.number;
         // let message = data.data.payment.message;
         window.location.href = `/thankyou?number=${orderNumber}`

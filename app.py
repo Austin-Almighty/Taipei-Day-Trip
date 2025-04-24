@@ -7,7 +7,6 @@ from typing import Annotated, List, Optional
 from pydantic import BaseModel
 import jwt
 
-from key import secret_key, algorithm
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 

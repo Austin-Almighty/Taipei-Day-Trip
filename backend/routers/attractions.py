@@ -1,39 +1,40 @@
 from fastapi import APIRouter, Query, Path
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl
 from fastapi.responses import JSONResponse
 from typing import Annotated, List, Optional
 from .attractions import *
 from fastapi import Request
 from ..database import *
+from ..schemas import *
 
 
-class Attraction(BaseModel):
-	id: int
-	name: str
-	category: str
-	description: str
-	address: str
-	transport: str
-	mrt: Optional[str] = None
-	lat: float
-	lng: float
-	images: List[str]
+# class AttractionFull(BaseModel):
+# 	id: int
+# 	name: str
+# 	category: str
+# 	description: str
+# 	address: str
+# 	transport: str
+# 	mrt: Optional[str] = None
+# 	lat: float
+# 	lng: float
+# 	images: List[HttpUrl]
 
-class AttractionsResponse(BaseModel):
-	nextPage: Optional[int]
-	data: List[Attraction]
+# class AttractionsResponse(BaseModel):
+# 	nextPage: Optional[int]
+# 	data: List[AttractionFull]
 
-class AttractionResponse(BaseModel):
-	data: Attraction
+# class AttractionResponse(BaseModel):
+# 	data: AttractionFull
 
-class MrtResponse(BaseModel):
-	data: List[str]
+# class MrtResponse(BaseModel):
+# 	data: List[str]
 
 attraction_router = APIRouter()
 db = Database()
 
 @attraction_router.get('/api/attractions', response_model=AttractionsResponse)
-async def find_attractions(request: Request, page: Annotated[int, Query()], keyword: Annotated[str | None, Query(max_length=20)] = None):
+async def find_attractions(request: Request, page: Annotated[int, Query()] = 0, keyword: Annotated[str | None, Query(max_length=20)] = None):
 	try:
 		limit = 13
 		offset = page*12

@@ -2,12 +2,14 @@ from fastapi import APIRouter, Query, Path, Depends, Body, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import JSONResponse 
 from pydantic import BaseModel
+from typing import Literal
 import jwt
 import os, json
 from dotenv import load_dotenv
 import mysql.connector
 
 from ..database import Database
+from ..schemas import *
 
 load_dotenv()
 
@@ -19,11 +21,11 @@ db = Database()
 
 bearer = HTTPBearer()
 
-class newBooking(BaseModel):
-	attractionID: int
-	date: str
-	time: str
-	price: int
+# class newBooking(BaseModel):
+# 	attractionID: int
+# 	date: str
+# 	time: Literal["morning", "afternoon"]
+# 	price: Literal[2000, 2500]
 
 # 取得尚未確認的預定行程
 @booking_router.get("/api/booking")

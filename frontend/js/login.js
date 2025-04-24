@@ -1,11 +1,17 @@
+const dialogue = document.getElementById("login-dialogue");
+
 function showDialogue() {
-  const dialogue = document.getElementById("login-dialogue");
   dialogue.showModal();
 }
 
+
 function closeDialogue() {
-  const dialogue = document.getElementById("login-dialogue");
-  dialogue.close();
+  dialogue.classList.add("closing");
+  dialogue.addEventListener("animationend", ()=>{
+    dialogue.classList.remove("closing");
+    dialogue.close();
+  }, { once: true});
+
   const existingError = document.querySelector("#login-dialogue p.error");
   if (existingError) existingError.remove();
 }
@@ -145,14 +151,20 @@ registerBtn.addEventListener("click", (e)=>{
     }
 })
 
+const signup = document.getElementById("signup-dialog");
 function showRegister(){
-    const signup = document.getElementById("signup-dialog");
     signup.showModal();
 }
 
 function closeRegister(){
-    const signup = document.getElementById("signup-dialog");
-    signup.close();
+    signup.classList.add("closing");
+    signup.addEventListener("animationend", ()=>{
+      signup.classList.remove("closing");
+      signup.close();
+    }, {once: true});
+
+    const existingError = document.querySelector("#login-dialogue p.error");
+    if (existingError) existingError.remove();
 }
 
 const closeRegisterBtn = document.querySelector("#signup-dialog img");

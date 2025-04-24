@@ -1,17 +1,18 @@
 from fastapi import APIRouter, Query, Path, Depends, Body, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import JSONResponse 
-from typing import Annotated
-from pydantic import BaseModel
+from typing import Annotated, Optional, List, Literal
+from pydantic import BaseModel, HttpUrl, EmailStr, Field
 import jwt
 import os, json
 import random
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, date
 from dotenv import load_dotenv
 import mysql.connector
 
 from ..database import Database
 from ..utilities import *
+from ..schemas import *
 
 order_router = APIRouter()
 db = Database()
@@ -21,22 +22,59 @@ load_dotenv()
 secret_key = os.getenv("secret_key")
 algorithm = os.getenv("algorithm")
 
+
+# class Attraction(BaseModel):
+# 	id: int
+# 	name: str
+# 	address: str
+# 	images: HttpUrl
+
+# class Trip(BaseModel):
+# 	attraction: Attraction
+# 	date: date
+# 	time: Literal["morning", "afternoon"]
+
+# class Contact(BaseModel):
+# 	name: str
+# 	email: EmailStr
+# 	phone: str
+
+# class Order(BaseModel):
+# 	price: Literal[2000, 2500]
+# 	trip: Trip
+# 	contact: Contact
+	
+
+# class Payment(BaseModel):
+# 	prime: str
+# 	order: Order
+	
+
 # 建立新的訂單並完成付款
 @order_router.post("/api/orders")
-async def tap_pay_order(request: Request, payment: Annotated[dict, Body()], credentials: HTTPAuthorizationCredentials = Depends(bearer)):
+async def tap_pay_order(request: Request, payment: Payment, credentials: HTTPAuthorizationCredentials = Depends(bearer)):
 	try:
 		token = credentials.credentials
 		decoded_token = jwt.decode(token, secret_key, algorithms=algorithm)
 		userID = decoded_token.get("userID")
-		tappay_prime = payment.get("prime")
-		order = payment["order"]
-		price = payment["order"]["price"]
-		date = order["date"]
-		time = order["time"]
-		attractionID = payment["order"]['trip']['id']
-		contact_name = payment["contact"].get("name")
-		contact_email = payment["contact"].get("email")
-		contact_phone = payment["contact"].get("phone")
+		# tappay_prime = payment.get("prime")
+		tappay_prime = payment.prime
+		# order = payment["order"]
+		order = payment.order
+		# price = payment["order"]["price"]
+		price = order.price
+		# date = order["date"]
+		date = order.trip.date
+		# time = order["time"]
+		time = order.trip.time
+		# attractionID = payment["order"]['trip']['id']
+		attractionID = order.trip.attraction.id
+		# contact_name = payment["contact"].get("name")
+		contact_name = order.contact.name
+		# contact_email = payment["contact"].get("email")
+		contact_email = order.contact.email
+		# contact_phone = payment["contact"].get("phone")
+		contact_phone = order.contact.phone
 		status = False
 		referenceID = datetime.now().strftime("%Y%m%d%H") + str(random.randint(10000, 99999))
 		query = "insert into orders (name, email, phone, attractionID, date, time, price, userID, status, referenceID) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"

@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Query, Path, Depends, Body
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from fastapi.responses import JSONResponse
 from typing import Annotated, List, Optional
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.exceptions import RequestValidationError, ResponseValidationError
 import argon2
 from argon2 import PasswordHasher
 import jwt
@@ -14,6 +15,7 @@ from datetime import datetime, timedelta, timezone
 
 from fastapi import Request
 from ..database import *
+from ..schemas import *
 
 load_dotenv()
 secret_key = os.getenv('secret_key')
@@ -26,14 +28,18 @@ db = Database()
 ph = PasswordHasher()
 bearer = HTTPBearer()
 
-class newUser(BaseModel):
-	name: str
-	email: str
-	password: str
+# class NewUser(BaseModel):
+# 	name: str
+# 	email: EmailStr
+# 	password: str
+
+# class LoginPayload(BaseModel):
+# 	email: EmailStr
+# 	password: str
 
 # 註冊一個新的會員
 @user_router.post("/api/user")
-def signup(request: Request, new_user: newUser):
+def signup(request: Request, new_user: NewUser):
 	try:
 		name = new_user.name
 		email = new_user.email
@@ -72,10 +78,10 @@ def fetch_current_user(request: Request, credentials: HTTPAuthorizationCredentia
 	
 # 登入會員帳戶
 @user_router.put("/api/user/auth")
-def login(request: Request, login_payload: Annotated[dict, Body()]):
+def login(request: Request, login_payload: LoginPayload):
 	try:
-		email = login_payload.get("email")
-		password = login_payload.get("password")
+		email = login_payload.email
+		password = login_payload.password
 		query = "select * from users where email = %s;"
 		para = (email,)
 		result = db.select_one(query, para)
@@ -93,4 +99,3 @@ def login(request: Request, login_payload: Annotated[dict, Body()]):
 			return JSONResponse({"error": True, "message": "登入失敗，帳號或密碼錯誤"}, status_code=400)
 	except Exception as e:
 		return JSONResponse({"error": True, "message": e}, status_code=500)
-	

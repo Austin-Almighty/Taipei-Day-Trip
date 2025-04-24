@@ -61,7 +61,16 @@ a {
     .register:hover {
         background-color: hsl(0, 0%, 30%);
         cursor: pointer;
+        color: white;
+        border-radius: 5px;
     }
+
+    #login-book:hover #login-register:hover {
+        background-color: hsl(0, 0%, 30%);
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+      }
 
 
     main {
@@ -116,6 +125,7 @@ a {
 
         img:hover {
             opacity: 1;
+            cursor: pointer;
         }
     }
 
@@ -140,11 +150,13 @@ a {
 
     .slider-nav a:hover {
         opacity: 1;
+        cursor: pointer;
     }
 
     .slider-nav a:active {
         opacity: 1;
         background-color: darkgray;
+        cursor: pointer;
     }
 
     .slider-nav a.selected {
@@ -240,6 +252,11 @@ a {
             font-weight: 400;
             line-height: 16px;
         }
+
+        button:hover {
+            cursor: pointer;
+            box-shadow: 6px 6px 5px 3px rgba(1, 77, 46, 0.211);
+        }
     }
 
     hr {
@@ -270,6 +287,10 @@ a {
         vertical-align: middle;
         line-height: 13.3px;
         height: 35px;
+    }
+
+    #datePicker:hover {
+        cursor: pointer;
     }
 
 
@@ -345,7 +366,16 @@ a {
     .register:hover {
         background-color: hsl(0, 0%, 30%);
         cursor: pointer;
+        color: white;
+        border-radius: 5px;
     }
+
+    #login-book:hover #login-register:hover {
+        background-color: hsl(0, 0%, 30%);
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+      }
 
 
     main {

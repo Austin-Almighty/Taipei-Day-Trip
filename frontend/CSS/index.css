@@ -59,12 +59,15 @@ a {
   .register:hover {
     background-color: hsl(0, 0%, 30%);
     cursor: pointer;
+    border-radius: 5px;
+    color: white;
   }
 
   #login-book:hover #login-register:hover {
     background-color: hsl(0, 0%, 30%);
+    border-radius: 5px;
     cursor: pointer;
-    ;
+    color: white;
   }
 
 
@@ -136,10 +139,13 @@ a {
 
   #searchIcon:hover {
     background-color: hsl(192, 38%, 50%);
+    cursor: pointer;
   }
 
   #searchIcon:active {
     background-color: hsl(192, 38%, 30%);
+    cursor: pointer;
+
   }
 
   #searchIcon img {
@@ -167,10 +173,12 @@ a {
 
   #scroll img:hover {
     background-color: hsl(0, 0%, 30%);
+    cursor: pointer;
   }
 
   #scroll img:active {
     background-color: hsl(0, 0%, 70%);
+    cursor: pointer;
   }
 
   .list-bar {
@@ -196,10 +204,16 @@ a {
 
   .list-bar .stations:hover {
     background-color: hsl(0, 0%, 60%);
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
   }
 
   .list-bar .stations:active {
     background-color: hsl(0, 0%, 80%);
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
   }
 
   .display {
@@ -221,6 +235,11 @@ a {
     border-width: 1px;
     border-color: rgba(0, 0, 0, 0.248);
     border-style: solid;
+  }
+
+  .locationCard:hover {
+    box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
   }
 
   .locationCard img {
@@ -333,9 +352,16 @@ body {
   .register:hover {
     background-color: hsl(0, 0%, 30%);
     cursor: pointer;
+    border-radius: 5px;
+    color: white;
   }
 
-
+  #login-book:hover #login-register:hover {
+    background-color: hsl(0, 0%, 30%);
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+  }
 
   .hero-section {
     background-image: url('../assets/welcome.png');
@@ -411,10 +437,12 @@ body {
 
   #searchIcon:hover {
     background-color: hsl(192, 38%, 50%);
+    cursor: pointer;
   }
 
   #searchIcon:active {
     background-color: hsl(192, 38%, 30%);
+    cursor: pointer;
   }
 
   #searchIcon img {
@@ -440,10 +468,12 @@ body {
 
   #scroll img:hover {
     background-color: hsl(0, 0%, 30%);
+    cursor: pointer;
   }
 
   #scroll img:active {
     background-color: hsl(0, 0%, 70%);
+    cursor: pointer;
   }
 
   .list-bar {
@@ -472,10 +502,16 @@ body {
 
   .list-bar .stations:hover {
     background-color: hsl(0, 0%, 60%);
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
   }
 
   .list-bar .stations:active {
     background-color: hsl(0, 0%, 80%);
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
   }
 
   .display {
@@ -496,6 +532,11 @@ body {
     height: 242px;
     border: 1px solid rgba(0, 0, 0, 0.248);
     overflow: hidden;
+  }
+
+  .locationCard:hover {
+    box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
   }
 
   .locationCard img {
@@ -598,8 +639,16 @@ body {
   .register:hover {
     background-color: hsl(0, 0%, 70%);
     cursor: pointer;
+    border-radius: 5px;
+    color: white;
   }
 
+  #login-book:hover #login-register:hover {
+    background-color: hsl(0, 0%, 30%);
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+  }
 
 
   .hero-section {
@@ -676,10 +725,12 @@ body {
 
   #searchIcon:hover {
     background-color: hsl(192, 38%, 50%);
+    cursor: pointer;
   }
 
   #searchIcon:active {
     background-color: hsl(192, 38%, 30%);
+    cursor: pointer;
   }
 
   #searchIcon img {
@@ -711,10 +762,12 @@ body {
 
   #scroll img:hover {
     background-color: hsl(0, 0%, 30%);
+    cursor: pointer;
   }
 
   #scroll img:active {
     background-color: hsl(0, 0%, 70%);
+    cursor: pointer;
   }
 
   .list-bar {
@@ -743,10 +796,16 @@ body {
 
   .list-bar .stations:hover {
     background-color: hsl(0, 0%, 60%);
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
   }
 
   .list-bar .stations:active {
     background-color: hsl(0, 0%, 80%);
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
   }
 
   .display {
@@ -768,6 +827,11 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.248);
     border-radius: 5px;
     overflow: hidden;
+  }
+
+  .locationCard:hover {
+    box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
   }
 
   .locationCard img {
