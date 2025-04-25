@@ -92,9 +92,9 @@ async function renderAttractions() {
     const data = await fetchAttractions(nextPage, keyword);
     const dataArray = await data.data;
     nextPage = data.nextPage;
-
+    const length = dataArray.length
     const gridDiv = document.querySelector('.grid');
-    for (let i=0; i<dataArray.length; i++) {
+    for (let i=0; i<length; i++) {
         const link = document.createElement('a');
         link.href=`/attraction/${dataArray[i].id}`;
 
@@ -131,6 +131,15 @@ async function renderAttractions() {
 
         link.appendChild(locationDiv);
         gridDiv.appendChild(link);
+
+        const footer = document.querySelector("footer");
+
+        // Reset if animation already applied before
+        footer.classList.remove("footer-animate");
+        void footer.offsetWidth; // Force reflow
+
+        // Trigger animation
+        footer.classList.add("footer-animate");
     }
 }
 

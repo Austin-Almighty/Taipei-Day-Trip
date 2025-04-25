@@ -10,6 +10,10 @@ footer {
     animation: page-load 1000ms ease-in-out;
 }
 
+.footer-animate {
+    animation: footer-load 1000ms ease-in-out;
+  }
+
 @keyframes nav-load {
     0% {
         transform: translateY(-100%);
