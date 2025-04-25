@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // style focus state
       ":focus": {
         color: "black",
-
       },
       // style valid state
       ".valid": {
@@ -67,94 +66,90 @@ document.addEventListener("DOMContentLoaded", () => {
       paymentBtn.setAttribute("disabled", true);
     }
 
-  //   updateFieldStatus("card-number", update.status.number);
-  //   updateFieldStatus("card-expiration-date", update.status.expiry);
-  //   updateFieldStatus("card-ccv", update.status.ccv);
-  // });
+    updateFieldStatus("card-number", update.status.number);
+    updateFieldStatus("card-expiration-date", update.status.expiry);
+    updateFieldStatus("card-ccv", update.status.ccv);
 
-  // function updateFieldStatus(fieldId, status) {
-  //   const field = document.getElementById(fieldId);
-  //   field.classList.remove("valid", "invalid");
+    function updateFieldStatus(fieldId, status) {
+      const field = document.getElementById(fieldId);
+      field.classList.remove("valid", "invalid");
 
-  //   if (status === 0) {
-  //     field.classList.remove("valid", "invalid");
-  //     field.classList.add("valid");
-  //   } else if (status === 2) {
-  //     field.classList.remove("valid", "invalid");
-  //     field.classList.add("invalid");
-  //   } else {
-  //     field.classList.remove("valid", "invalid");
-  //   }
-  // }
-});
+      if (status === 0) {
+        field.classList.remove("valid", "invalid");
+        field.classList.add("valid");
+      } else if (status === 2) {
+        field.classList.remove("valid", "invalid");
+        field.classList.add("invalid");
+      } else {
+        field.classList.remove("valid", "invalid");
+      }
+    }
+  });
 
+  const contactName = document.getElementById("contact-name");
+  const contactEmail = document.getElementById("contact-email");
+  const contactPhone = document.getElementById("contact-phone");
 
-const contactName = document.getElementById("contact-name");
-const contactEmail = document.getElementById("contact-email");
-const contactPhone = document.getElementById("contact-phone");
+  const paymentBtn = document.getElementById("paymentBtn");
+  paymentBtn.addEventListener("click", () => {
+    sendPrime(primeToBackEnd);
+  });
 
-const paymentBtn = document.getElementById('paymentBtn');
-paymentBtn.addEventListener("click", ()=>{sendPrime(primeToBackEnd)});
-
-
-
-function sendPrime(callback) {
+  function sendPrime(callback) {
     if (!contactName.value || !contactEmail.value || !contactPhone.value) {
-        alert("請輸入聯絡資訊")
-        return
+      alert("請輸入聯絡資訊");
+      return;
     }
     // 取得 TapPay Fields 的 status
-    const tappayStatus = TPDirect.card.getTappayFieldsStatus()
+    const tappayStatus = TPDirect.card.getTappayFieldsStatus();
     // 確認是否可以 getPrime
     if (tappayStatus.canGetPrime === false) {
-        alert('連線失敗')
+      alert("連線失敗");
     }
     // Get prime
     TPDirect.card.getPrime((result) => {
-        if (result.status !== 0) {
-            alert('get prime error ' + result.msg)
-        } else {
-            callback(result.card.prime);
-        }
-    })
+      if (result.status !== 0) {
+        alert("get prime error " + result.msg);
+      } else {
+        callback(result.card.prime);
+      }
+    });
+  }
 
-}
-
-async function primeToBackEnd(prime) {
-    let booking = JSON.parse(localStorage.getItem('booking'));
+  async function primeToBackEnd(prime) {
+    let booking = JSON.parse(localStorage.getItem("booking"));
     let token = localStorage.getItem("jwtToken");
     let response = await fetch("/api/orders", {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json",
-            "Authorization": `Bearer ${token}`
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        prime: prime,
+        order: {
+          price: booking.data.price,
+          trip: {
+            attraction: booking.data.attraction,
+            date: booking.data.date,
+            time: booking.data.time,
+          },
+          contact: {
+            name: contactName.value.trim(),
+            email: contactEmail.value.trim(),
+            phone: contactPhone.value.trim(),
+          },
         },
-        body: JSON.stringify({
-            prime: prime,
-            order: {
-                price: booking.data.price,
-                trip: {
-                  attraction: booking.data.attraction,
-                  date: booking.data.date,
-                  time: booking.data.time,
-                },
-                contact: {
-                  name: contactName.value.trim(),
-                  email: contactEmail.value.trim(),
-                  phone: contactPhone.value.trim()
-              }
-            },
-        })
+      }),
     });
     if (response.ok) {
-        let data = await response.json();
-        console.log(data);
-        let orderNumber = data.data.number;
-        // let message = data.data.payment.message;
-        window.location.href = `/thankyou?number=${orderNumber}`
-
+      let data = await response.json();
+      console.log(data);
+      let orderNumber = data.data.number;
+      // let message = data.data.payment.message;
+      window.location.href = `/thankyou?number=${orderNumber}`;
     } else {
-       console.log("Something went wrong: No response from API")
+      console.log("Something went wrong: No response from API");
     }
-}
-})
+  }
+});

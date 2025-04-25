@@ -1,14 +1,12 @@
 from fastapi import APIRouter, Query, Path, Depends, Body, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import JSONResponse 
-from pydantic import BaseModel
-from typing import Literal
 import jwt
 import os, json
 from dotenv import load_dotenv
 import mysql.connector
 
-from ..database import Database
+from ..database import *
 from ..schemas import *
 
 load_dotenv()
@@ -17,7 +15,7 @@ secret_key = os.getenv("secret_key")
 algorithm = os.getenv("algorithm")
 
 booking_router = APIRouter()
-db = Database()
+db = shared_pool
 
 bearer = HTTPBearer()
 

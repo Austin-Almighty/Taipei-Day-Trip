@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Query, Path
-from pydantic import BaseModel, HttpUrl
 from fastapi.responses import JSONResponse
-from typing import Annotated, List, Optional
+from typing import Annotated
 from .attractions import *
 from fastapi import Request
 from ..database import *
@@ -31,7 +30,7 @@ from ..schemas import *
 # 	data: List[str]
 
 attraction_router = APIRouter()
-db = Database()
+db = shared_pool
 
 @attraction_router.get('/api/attractions', response_model=AttractionsResponse)
 async def find_attractions(request: Request, page: Annotated[int, Query()] = 0, keyword: Annotated[str | None, Query(max_length=20)] = None):
@@ -76,9 +75,6 @@ async def one_attraction(request: Request, attractionID: Annotated[int, Path()])
 @attraction_router.get('/api/mrts', response_model=MrtResponse)
 async def mrts(request: Request):
 	try:
-		# cursor.execute("select mrt from attractions group by mrt order by count(mrt) desc")
-		# stations = cursor.fetchall()
-		# data = [station[0] for station in stations if station[0]]
 		query = "select mrt from attractions group by mrt order by count(mrt) desc;"
 		results = db.select_all(query)
 		return JSONResponse({"data":results}, status_code=200)

@@ -1,39 +1,20 @@
-from fastapi import FastAPI, Request, Query, Body, Depends, Path
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi import FastAPI, Request
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-import mysql.connector
 
-from typing import Annotated, List, Optional
-from pydantic import BaseModel
-import jwt
-
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-
-
-import json
-
-from backend.database.db_connect import Database
 from backend.routers import *
 
 app=FastAPI()
-
-db = Database()
-
-bearer = HTTPBearer()
 
 app.mount("/css", StaticFiles(directory="frontend/CSS"), name="css")
 app.mount("/js",  StaticFiles(directory="frontend/js"), name="js")
 app.mount("/assets", StaticFiles(directory="frontend/assets"), name="assets")
 app.mount("/static", StaticFiles(directory="frontend/static", html=True), name="static")
 
-
 app.include_router(attraction_router)
 app.include_router(user_router)
 app.include_router(booking_router)
 app.include_router(order_router)
-
-
-
 
 # Static Pages (Never Modify Code in this Block)
 @app.get("/", include_in_schema=False)

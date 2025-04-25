@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Query, Path, Depends, Body
-from pydantic import BaseModel, EmailStr
 from fastapi.responses import JSONResponse
 from typing import Annotated, List, Optional
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -24,7 +23,7 @@ algorithm = os.getenv('algorithm')
 
 
 user_router = APIRouter()
-db = Database()
+db = shared_pool
 ph = PasswordHasher()
 bearer = HTTPBearer()
 
@@ -55,6 +54,8 @@ def signup(request: Request, new_user: NewUser):
 		return JSONResponse({"error":True, "message":"註冊失敗"}, status_code=400)
 	except Exception as e:
 		return JSONResponse({"error":True, "message":"伺服器內部錯誤"}, status_code=500)
+	except RequestValidationError:
+		return JSONResponse({"error": True, "message":"請輸入有效的email地址"}, status_code=422)
 
 
 
@@ -99,3 +100,5 @@ def login(request: Request, login_payload: LoginPayload):
 			return JSONResponse({"error": True, "message": "登入失敗，帳號或密碼錯誤"}, status_code=400)
 	except Exception as e:
 		return JSONResponse({"error": True, "message": e}, status_code=500)
+	except RequestValidationError:
+		return JSONResponse({"error": True, "message":"請輸入有效的email地址"}, status_code=422)

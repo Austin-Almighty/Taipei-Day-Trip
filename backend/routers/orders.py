@@ -2,7 +2,6 @@ from fastapi import APIRouter, Query, Path, Depends, Body, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import JSONResponse 
 from typing import Annotated, Optional, List, Literal
-from pydantic import BaseModel, HttpUrl, EmailStr, Field
 import jwt
 import os, json
 import random
@@ -10,13 +9,13 @@ from datetime import datetime, timedelta, timezone, date
 from dotenv import load_dotenv
 import mysql.connector
 
-from ..database import Database
+from ..database import shared_pool
 from ..utilities import *
 from ..schemas import *
 
 order_router = APIRouter()
-db = Database()
 bearer = HTTPBearer()
+db = shared_pool
 
 load_dotenv()
 secret_key = os.getenv("secret_key")

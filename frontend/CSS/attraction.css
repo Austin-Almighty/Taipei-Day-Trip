@@ -11,7 +11,31 @@ a {
     color: inherit;
 }
 
+nav a:hover {
+    background-color: rgba(68, 136, 153, 1);
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+  }
 
+#email:valid,
+#newEmail:valid {
+    background-color: ivory;
+    border: none;
+    border-radius: 5px;
+    accent-color: gold;
+}
+
+#email:invalid,
+#newEmail:invalid {
+    background-color: ivory;
+    border: none;
+    outline: 2px solid red;
+    border-radius: 5px;
+    accent-color: gold;
+}
+  
 @media (min-width: 1201px) and (max-width: 1920px) {
 
     nav {

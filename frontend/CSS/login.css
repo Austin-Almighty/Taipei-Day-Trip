@@ -94,7 +94,7 @@
   dialog {
     animation-duration: 1s, 1s;
     animation-name: slide-down;
-    animation-direction: normal;
+    animation-direction: normal
   }
 
   @keyframes slide-down {
