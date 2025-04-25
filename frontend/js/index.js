@@ -11,13 +11,21 @@ const searchForm = document.getElementById('searchForm');
 
 
 
+const footer = document.querySelector('footer');
+const gridDiv = document.querySelector('.grid');
+
 function performSearch() {
     let searchKeyword = searchBox.value.trim();
     nextPage = 0;
     keyword = searchKeyword;
-    const gridDiv = document.querySelector('.grid');
     gridDiv.innerHTML = '';
-    loadNextPage();
+    footer.classList.remove("footer-animate");
+    void footer.offsetWidth; // Force reflow
+    footer.classList.add("footer-animate");
+    setTimeout(()=>{
+      loadNextPage();
+    }, 1000)
+    
   }
 
 
@@ -132,14 +140,7 @@ async function renderAttractions() {
         link.appendChild(locationDiv);
         gridDiv.appendChild(link);
 
-        const footer = document.querySelector("footer");
-
-        // Reset if animation already applied before
-        footer.classList.remove("footer-animate");
-        void footer.offsetWidth; // Force reflow
-
-        // Trigger animation
-        footer.classList.add("footer-animate");
+        
     }
 }
 
