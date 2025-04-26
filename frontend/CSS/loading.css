@@ -29,7 +29,7 @@ footer {
 @keyframes footer-load {
     0% {
         transform: translateY(100%);
-        opacity: 0.2;
+        opacity: 0;
     }
 
     100% {

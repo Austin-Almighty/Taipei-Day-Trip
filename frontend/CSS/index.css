@@ -34,6 +34,10 @@ nav a:hover {
   accent-color: gold;
 }
 
+.hidden {
+  display: none;
+}
+
 @media (min-width: 1201px) and (max-width: 1920px) {
   nav {
     display: flex;

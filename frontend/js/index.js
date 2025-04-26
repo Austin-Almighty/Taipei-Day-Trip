@@ -18,13 +18,15 @@ function performSearch() {
     let searchKeyword = searchBox.value.trim();
     nextPage = 0;
     keyword = searchKeyword;
+    footer.classList.add("hidden");
     gridDiv.innerHTML = '';
     footer.classList.remove("footer-animate");
     void footer.offsetWidth; // Force reflow
+    footer.classList.remove("hidden");
     footer.classList.add("footer-animate");
     setTimeout(()=>{
       loadNextPage();
-    }, 1000)
+    }, 10)
     
   }
 
@@ -39,6 +41,7 @@ searchBox.addEventListener('keydown', (event) => {
   });
 
 
+
 async function renderStation(station) {
     const addMRT = document.createElement('div');
     addMRT.classList.add('stations');
@@ -46,9 +49,16 @@ async function renderStation(station) {
     addMRT.addEventListener('click', ()=>{
         nextPage = 0;
         keyword = station;
-        const gridDiv = document.querySelector('.grid');
+        footer.classList.add("hidden");
         gridDiv.innerHTML = '';
-        loadNextPage();
+        footer.classList.remove("footer-animate");
+        void footer.offsetWidth; // Force reflow
+        footer.classList.remove("hidden");
+        footer.classList.add("footer-animate");
+        setTimeout(()=>{
+      loadNextPage();
+    }, 10)
+
     })
     listBar.appendChild(addMRT);
 }
