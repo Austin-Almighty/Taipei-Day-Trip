@@ -5,33 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Booking</title>
-  <link rel="stylesheet" href="../external/booking.css">
-  <link rel="stylesheet" href="../external/login.css">
+  <link rel="stylesheet" href="../css/booking.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/loading.css">
 </head>
-<style>
-  .tpfield {
-        width: 180px;
-        height: 18px;
-        border-width: 1px;
-        border-style: solid;
-        border-color: rgba(232, 232, 232, 1);
-        border-radius: 5px;
-        padding:10px;
-    }
-
-    .tpfield-container {
-        align-items: center;
-      }
-    .tpfield-container label {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-    label {
-      margin-bottom: 15px;
-    }
-
-</style>
 
 <body>
   <nav>
@@ -45,13 +22,13 @@
   </nav>
 
   <dialog id="login-dialogue">
-    <img src="../external/icon/icon_close.png">
+    <img src="../assets/icon_close.png">
     <div>
       <div id="decorator-bar"></div>
       <div class="main-box">
         <h3>輸入會員帳號</h3>
         <form>
-          <input id="email" type="text" placeholder="輸入電子信箱"><br>
+          <input id="email" type="email" placeholder="輸入電子信箱"><br>
           <input id="password" type="password" placeholder="輸入密碼">
           <button>登入帳號</button>
         </form>
@@ -61,14 +38,14 @@
   </dialog>
 
   <dialog id="signup-dialog">
-    <img src="../external/icon/icon_close.png">
+    <img src="../assets/icon_close.png">
     <div>
       <div id="decorator-bar"></div>
       <div class="main-box">
         <h3>註冊會員帳號</h3>
         <form>
           <input type="text" placeholder="輸入姓名" id="newName"><br>
-          <input type="text" placeholder="輸入電子郵件" id="newEmail"><br>
+          <input type="email" placeholder="輸入電子郵件" id="newEmail"><br>
           <input type="password" placeholder="輸入密碼" id="newPassword"><br>
           <button>註冊新帳戶</button>
         </form>
@@ -83,7 +60,7 @@
       <img src="" id="mainImage">
       <div class="attractionInfo">
         <h4>台北一日遊：<span id="attractionName">平安鐘</span></h4>
-        <img src="../external/icon/icon/icon_delete.png" id="deleteBtn">
+        <img src="../assets/icon_delete.png" id="deleteBtn">
         <p id=><span class="title">日期：</span><span id="bookingDate">2025年4月15日</span></p>
         <p><span class="title">時間：</span><span id="bookingTime">早上9點到下午4點</span></p>
         <p><span class="title">費用：</span>新台幣<span id="tourCost">2000</span>元</p>
@@ -129,11 +106,11 @@
     <p>COPYRIGHT © 2025 台北一日遊</p>
   </footer>
 </body>
-<script src="../external/login.js"></script>
-<script src="../external/credential.js"></script>
-<script src="../external/bookingBtn.js"></script>
-<script src="../external/booking.js"></script>
+<script src="../js/login.js"></script>
+<script src="../js/credential.js"></script>
+<script src="../js/bookingBtn.js"></script>
+<script src="../js/booking.js"></script>
 <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.19.2" defer></script>
-<script src="../external/tappay.js" defer></script>
+<script src="../js/tappay.js" defer></script>
 
 </html>

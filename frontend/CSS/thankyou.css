@@ -33,6 +33,14 @@ nav {
     align-items: center;
 }
 
+nav a:hover {
+    background-color: rgba(68, 136, 153, 1);
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+  }
+
 #navbar h2 {
     color: #448899;
     size: 30px;
@@ -63,6 +71,23 @@ nav #login {
 #login-book:hover #login-register:hover {
     background-color: hsl(0, 0%, 30%);
     cursor: pointer;
+}
+
+#email:valid,
+#newEmail:valid {
+    background-color: ivory;
+    border: none;
+    border-radius: 5px;
+    accent-color: gold;
+}
+
+#email:invalid,
+#newEmail:invalid {
+    background-color: ivory;
+    border: none;
+    outline: 2px solid red;
+    border-radius: 5px;
+    accent-color: gold;
 }
 
 .order {

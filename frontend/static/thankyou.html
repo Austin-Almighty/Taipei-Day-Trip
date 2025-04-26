@@ -9,9 +9,10 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="../external/thankyou.css">
-  <link rel="stylesheet" href="../external/login.css">
-  
+  <link rel="stylesheet" href="../css/thankyou.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/loading.css">
+    
 </head>
 <body>
   <nav>
@@ -25,13 +26,13 @@
   </nav>
 
   <dialog id="login-dialogue">
-    <img src="../external/icon/icon_close.png">
+    <img src="../assets/icon_close.png">
     <div>
       <div id="decorator-bar"></div>
       <div class="main-box">
         <h3>輸入會員帳號</h3>
         <form>
-          <input id="email" type="text" placeholder="輸入電子信箱"><br>
+          <input id="email" type="email" placeholder="輸入電子信箱"><br>
           <input id="password" type="password" placeholder="輸入密碼">
           <button>登入帳號</button>
         </form>
@@ -41,14 +42,14 @@
   </dialog>
 
   <dialog id="signup-dialog">
-    <img src="../external/icon/icon_close.png">
+    <img src="../assets/icon_close.png">
     <div>
       <div id="decorator-bar"></div>
       <div class="main-box">
         <h3>註冊會員帳號</h3>
         <form>
           <input type="text" placeholder="輸入姓名" id="newName"><br>
-          <input type="text" placeholder="輸入電子郵件" id="newEmail"><br>
+          <input type="email" placeholder="輸入電子郵件" id="newEmail"><br>
           <input type="password" placeholder="輸入密碼" id="newPassword"><br>
           <button>註冊新帳戶</button>
         </form>
@@ -82,8 +83,8 @@
 <footer class="highfooter">
   <p>COPYRIGHT © 2025 台北一日遊</p>
 </footer>
-<script src="../external/thankyou.js"></script>
-<script src="../external/login.js"></script>
-<script src="../external/credential.js"></script>
-<script src="../external/bookingBtn.js"></script>
+<script src="../js/thankyou.js"></script>
+<script src="../js/login.js"></script>
+<script src="../js/credential.js"></script>
+<script src="../js/bookingBtn.js"></script>
 </html>

@@ -11,13 +11,23 @@ const searchForm = document.getElementById('searchForm');
 
 
 
+const footer = document.querySelector('footer');
+const gridDiv = document.querySelector('.grid');
+
 function performSearch() {
     let searchKeyword = searchBox.value.trim();
     nextPage = 0;
     keyword = searchKeyword;
-    const gridDiv = document.querySelector('.grid');
+    footer.classList.add("hidden");
     gridDiv.innerHTML = '';
-    loadNextPage();
+    footer.classList.remove("footer-animate");
+    void footer.offsetWidth; // Force reflow
+    footer.classList.remove("hidden");
+    footer.classList.add("footer-animate");
+    setTimeout(()=>{
+      loadNextPage();
+    }, 10)
+    
   }
 
 
@@ -31,6 +41,7 @@ searchBox.addEventListener('keydown', (event) => {
   });
 
 
+
 async function renderStation(station) {
     const addMRT = document.createElement('div');
     addMRT.classList.add('stations');
@@ -38,9 +49,16 @@ async function renderStation(station) {
     addMRT.addEventListener('click', ()=>{
         nextPage = 0;
         keyword = station;
-        const gridDiv = document.querySelector('.grid');
+        footer.classList.add("hidden");
         gridDiv.innerHTML = '';
-        loadNextPage();
+        footer.classList.remove("footer-animate");
+        void footer.offsetWidth; // Force reflow
+        footer.classList.remove("hidden");
+        footer.classList.add("footer-animate");
+        setTimeout(()=>{
+      loadNextPage();
+    }, 10)
+
     })
     listBar.appendChild(addMRT);
 }
@@ -50,7 +68,7 @@ async function fetchStations() {
     if (response.ok) {
         let data = await response.json();
         for (station of data.data) {
-            renderStation(station);
+            renderStation(station["mrt"]);
         }
     } else {
         console.log('Unable to fetch station names');
@@ -92,9 +110,9 @@ async function renderAttractions() {
     const data = await fetchAttractions(nextPage, keyword);
     const dataArray = await data.data;
     nextPage = data.nextPage;
-
+    const length = dataArray.length
     const gridDiv = document.querySelector('.grid');
-    for (let i=0; i<dataArray.length; i++) {
+    for (let i=0; i<length; i++) {
         const link = document.createElement('a');
         link.href=`/attraction/${dataArray[i].id}`;
 
@@ -131,6 +149,8 @@ async function renderAttractions() {
 
         link.appendChild(locationDiv);
         gridDiv.appendChild(link);
+
+        
     }
 }
 

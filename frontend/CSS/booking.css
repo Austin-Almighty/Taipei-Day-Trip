@@ -11,6 +11,66 @@ a {
     color: inherit;
 }
 
+nav a:hover {
+    background-color: rgba(68, 136, 153, 1);
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  #email:valid,
+  #newEmail:valid {
+      background-color: ivory;
+      border-radius: 5px;
+      accent-color: gold;
+  }
+
+
+  #email:invalid,
+  #newEmail:invalid,
+  #contact-email:invalid {
+      background-color: ivory;
+      border: none;
+      outline: 2px solid red;
+      border-radius: 5px;
+      accent-color: gold;
+  }
+
+  .tpfield {
+    width: 180px;
+    height: 18px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(232, 232, 232, 1);
+    border-radius: 5px;
+    padding:10px;
+}
+
+.tpfield-container {
+    align-items: center;
+  }
+.tpfield-container label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+label {
+  margin-bottom: 15px;
+}
+
+.tpfield.invalid {
+    border: none;
+    outline: 2px solid red;
+}
+
+.tpfield.valid {
+    background-color: ivory;
+    border: none;
+    border-radius: 5px;
+    accent-color: gold;
+}
+
 
 
 @media (min-width: 360px) and (max-width: 1200px) {

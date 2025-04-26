@@ -21,6 +21,10 @@
       left: 307px;
     }
 
+    img:hover {
+      cursor: pointer;
+    }
+
     #decorator-bar {
       background-color: #337788;
       height: 10px;
@@ -61,16 +65,64 @@
       border: none;
     }
 
+    button:hover {
+      cursor: pointer;
+    }
+
     p{
       color: rgba(102, 102, 102, 1);
       font-weight: 500;
       font-size: 16px;
+    }
+    #moveToLogin, #moveToRegister {
+      margin-left: 5px;
+    }
+    #moveToLogin:hover, #moveToRegister:hover {
+      cursor: pointer;
+      color: white;
+      border-radius: 5px;
+      background-color: hsl(0, 0%, 30%);
+      padding: 3px;
     }
   }
 
 
   dialog::backdrop{
     background-color: rgba(0, 0, 0, 0.25);
+  }
+
+  dialog {
+    animation-duration: 1s, 1s;
+    animation-name: slide-down;
+    animation-direction: normal
+  }
+
+  @keyframes slide-down {
+    from {
+      translate: 0 -50%;
+      opacity: 0.3;
+    }
+
+    to {
+      translate: 0 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      translate: 0 0;
+      opacity: 1;
+    }
+
+    to {
+      translate: 0 -50%;
+      opacity: 0;
+    }
+  }
+
+  dialog.closing{
+    animation: fade-out 0.5s forwards;
   }
 
 }
@@ -99,6 +151,11 @@
       left: 307px;
     }
 
+    img:hover {
+      cursor: pointer;
+      box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.3);
+    }
+
     #decorator-bar {
       background-color: #337788;
       height: 10px;
@@ -139,10 +196,26 @@
       border: none;
     }
 
+    button:hover {
+      cursor: pointer;
+    }
+
     p{
       color: rgba(102, 102, 102, 1);
       font-weight: 500;
       font-size: 16px;
+    }
+
+    #moveToLogin, #moveToRegister {
+      margin-left: 5px;
+    }
+
+    #moveToLogin:hover, #moveToRegister:hover {
+      cursor: pointer;
+      color: white;
+      border-radius: 5px;
+      background-color: hsl(0, 0%, 30%);
+      padding: 3px;
     }
   }
 

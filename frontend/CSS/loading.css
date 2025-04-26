@@ -1,0 +1,49 @@
+nav {
+    animation: nav-load 1000ms ease-in-out;
+}
+
+footer {
+    animation: footer-load 1000ms ease-in-out;
+}
+
+* {
+    animation: page-load 1000ms ease-in-out;
+}
+
+.footer-animate {
+    animation: footer-load 1000ms ease-in-out;
+  }
+
+@keyframes nav-load {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes footer-load {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes page-load {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
