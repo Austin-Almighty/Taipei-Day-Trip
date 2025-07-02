@@ -11,8 +11,8 @@
 Find your next adventure from the top tourist attractions from our database
 ![alt text](image.png)
 
-## Book your tour. It is that simple.
-Visit the dedicated page for your preferred attractions. Learn more about them and get a preview of your trip. Once you are ready, simple book a trip on the same page.
+## Book your tour. It's that simple.
+Visit the dedicated page for your preferred attractions. Learn more about them and get a preview of your trip. Once you are ready, simply book a trip on the same page.
 
 ![alt text](image-1.png)
 
@@ -43,4 +43,6 @@ Visit the dedicated page for your preferred attractions. Learn more about them a
 ## Tech Highlights
 - Scroll-triggered loading: By utilizing the Intersection Observer API and a custom pagination function in the beck-end, the scroll to load animation effects were achieved without using any third party library.
 
-- Database indexing: By implementing indexing in the MySQL database, we can improve the query performance.
+
+
+<!-- - Database indexing: By implementing indexing in the MySQL database, we can improve the query performance. -->
