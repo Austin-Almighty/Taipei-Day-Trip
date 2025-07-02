@@ -41,4 +41,6 @@ Visit the dedicated page for your preferred attractions. Learn more about them a
 - Incorporated third-party payment system, TapPay
 
 ## Tech Highlights
-- Scroll-triggered loading: By utilizing the Intersection Observer API and custom pagination function in the beck-end
+- Scroll-triggered loading: By utilizing the Intersection Observer API and a custom pagination function in the beck-end, the scroll to load animation effects were achieved without using any third party library.
+
+- Database indexing: By implementing indexing in the MySQL database, we can improve the query performance.
