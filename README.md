@@ -7,6 +7,14 @@
 ## Book Your Trip Now!
 [Taipei Day Trip](http://35.94.253.126:8000/)
 
+## The most popular destinations in Taipei right at your finger tip!
+Find your next adventure from the top tourist attractions from our database
+![alt text](image.png)
+
+## Book your tour. It is that simple.
+Visit the dedicated page for your preferred attractions. Learn more about them and get a preview of your trip. Once you are ready, simple book a trip on the same page.
+
+![alt text](image-1.png)
 
 ## Tech Stack
 **Front-End**
