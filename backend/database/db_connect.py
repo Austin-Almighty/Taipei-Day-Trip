@@ -23,6 +23,7 @@ class Database:
   
   def select_all(self, query:str, parameters: dict | tuple | None = None) -> list[dict]:
     connection = self.get_connection()
+    connection.ping(reconnect=True)
     cursor = connection.cursor(dictionary=True)
     try:
         if parameters is not None:
@@ -37,6 +38,7 @@ class Database:
     
   def select_one(self, query:str, parameters: dict | tuple | None = None) -> dict | None:
     connection = self.get_connection()
+    connection.ping(reconnect=True)
     cursor = connection.cursor(dictionary=True)
     try:
         if parameters is not None:
@@ -50,6 +52,7 @@ class Database:
   
   def insert(self, query:str, values: dict | tuple):
     connection = self.get_connection()
+    connection.ping(reconnect=True)
     cursor = connection.cursor(dictionary=True)
     try:
       cursor.execute(query, values)
@@ -57,7 +60,3 @@ class Database:
     finally:
       cursor.close()
       connection.close()
-
-
-
-
